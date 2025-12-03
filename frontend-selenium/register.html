@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Criar Conta</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#39E079", "background-light": "#f6f8f7", "background-dark": "#122017", "card-light": "#FFFFFF", "card-dark": "#262A34", "text-light-primary": "#2D344B", "text-dark-primary": "#FFFFFF", "text-light-secondary": "#6A7081", "text-dark-secondary": "#B0B3B8"}, fontFamily: {display: ["Poppins", "sans-serif"]}, borderRadius: {DEFAULT: "1.25rem"}}}};</script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 24px;
+    }
+  </style>
+  <style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <style>
+    /* Animações adicionais */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+    .animate-slide-up {
+      animation: slideUp 0.8s ease-out;
+    }
+    /* Proporção mobile 390x844 */
+    .mobile-container {
+      width: 390px;
+      height: 844px;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+    @media (max-width: 390px) {
+      .mobile-container {
+        width: 100vw;
+        height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body class="font-display flex items-center justify-center min-h-screen">
+  <div class="mobile-container bg-background-light dark:bg-background-dark shadow-2xl overflow-hidden relative rounded-[1.25rem]">
+    <div class="relative flex h-full w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+    <!-- Top App Bar -->
+    <div class="flex items-center p-4 pb-2 justify-between bg-background-light dark:bg-background-dark">
+      <div class="flex size-12 shrink-0 items-center justify-start">
+        <span class="material-symbols-outlined text-zinc-900 dark:text-zinc-200 cursor-pointer hover:text-primary transition-colors" id="back-button">arrow_back</span>
+      </div>
+      <h1 class="text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center text-zinc-900 dark:text-zinc-100">Criar Conta</h1>
+      <div class="size-12 shrink-0"></div>
+    </div>
+    
+    <main class="flex-1 px-4 py-6">
+      <div class="flex flex-col gap-6 animate-fade-in">
+        <!-- Full Name Field -->
+        <label class="flex flex-col w-full animate-slide-up" style="animation-delay: 0.1s;">
+          <p class="text-zinc-800 dark:text-zinc-300 text-sm font-medium leading-normal pb-2">Nome completo</p>
+          <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-zinc-300 dark:border-zinc-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 p-[15px] text-base font-normal leading-normal transition-all focus:border-primary/50" placeholder="Digite seu nome completo" type="text" value="" id="fullName"/>
+        </label>
+        
+        <!-- Phone Number Field -->
+        <label class="flex flex-col w-full animate-slide-up" style="animation-delay: 0.2s;">
+          <p class="text-zinc-800 dark:text-zinc-300 text-sm font-medium leading-normal pb-2">Número de telefone</p>
+          <div class="flex w-full flex-1 items-stretch">
+            <div class="flex items-center justify-center px-4 border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 rounded-l-lg border-r-0">
+              <span class="text-zinc-800 dark:text-zinc-300 text-base font-normal">+55</span>
+            </div>
+            <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-zinc-900 dark:text-zinc-100 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-zinc-300 dark:border-zinc-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 p-[15px] text-base font-normal leading-normal transition-all focus:border-primary/50" placeholder="Informe seu telefone" type="tel" value="" id="phoneNumber"/>
+          </div>
+        </label>
+        
+        <!-- Email Address Field -->
+        <label class="flex flex-col w-full animate-slide-up" style="animation-delay: 0.3s;">
+          <p class="text-zinc-800 dark:text-zinc-300 text-sm font-medium leading-normal pb-2">E-mail</p>
+          <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-zinc-300 dark:border-zinc-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 p-[15px] text-base font-normal leading-normal transition-all focus:border-primary/50" placeholder="Digite seu e-mail" type="email" value="" id="email"/>
+        </label>
+        
+        <!-- Password Field -->
+        <label class="flex flex-col w-full animate-slide-up" style="animation-delay: 0.4s;">
+          <p class="text-zinc-800 dark:text-zinc-300 text-sm font-medium leading-normal pb-2">Senha</p>
+          <div class="flex w-full flex-1 items-stretch">
+            <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-l-lg text-zinc-900 dark:text-zinc-100 focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-zinc-300 dark:border-zinc-700 bg-background-light dark:bg-background-dark h-14 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 p-[15px] pr-2 text-base font-normal leading-normal transition-all focus:border-primary/50" placeholder="Digite sua senha" type="password" value="" id="password"/>
+            <div class="text-zinc-500 dark:text-zinc-400 flex border border-zinc-300 dark:border-zinc-700 bg-background-light dark:bg-background-dark items-center justify-center pr-[15px] rounded-r-lg border-l-0 pl-3 cursor-pointer hover:text-primary transition-colors" id="toggle-password">
+              <span class="material-symbols-outlined" id="password-icon">visibility</span>
+            </div>
+          </div>
+        </label>
+        
+        <!-- Terms and Conditions -->
+        <p class="text-center text-xs text-zinc-500 dark:text-zinc-400 px-4 animate-slide-up" style="animation-delay: 0.5s;">
+          Ao criar a conta, você concorda com os
+          <a class="font-medium text-primary hover:underline" href="#">Termos de Serviço</a>
+          e a
+          <a class="font-medium text-primary hover:underline" href="#">Política de Privacidade</a>.
+        </p>
+      </div>
+    </main>
+    
+    <footer class="p-4 pt-8">
+      <div class="flex flex-col items-center gap-4 animate-slide-up" style="animation-delay: 0.6s;">
+        <!-- Sign Up Button -->
+        <button class="flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 text-base font-semibold text-white shadow-sm transition-all hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary active:scale-95" id="sign-up-button">
+          Criar conta
+        </button>
+        
+        <!-- Log In Link -->
+        <p class="text-center text-sm text-zinc-600 dark:text-zinc-400">
+          Já possui uma conta?
+          <a class="font-semibold text-primary hover:underline" href="login.html" id="login-link">Entrar</a>
+        </p>
+      </div>
+    </footer>
+  </div>
+  </div>
+   
+   <script>
+     // Verifica preferência do sistema para dark mode
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+    
+    // Ouve mudanças na preferência
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (e.matches) {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+      }
+    });
+    
+    // Toggle password visibility
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+    const passwordIcon = document.getElementById('password-icon');
+    
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      passwordIcon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+    });
+    
+    // Back button functionality
+    document.getElementById('back-button').addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+    
+    // Form validation and submission
+    document.getElementById('sign-up-button').addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const fullName = document.getElementById('fullName').value.trim();
+      const phoneNumber = document.getElementById('phoneNumber').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      
+      // Validação básica
+      if (!fullName || !phoneNumber || !email || !password) {
+        alert('Preencha todos os campos');
+        return;
+      }
+      
+      if (!email.includes('@')) {
+        alert('Digite um e-mail válido');
+        return;
+      }
+      
+      if (password.length < 6) {
+        alert('A senha deve ter pelo menos 6 caracteres');
+        return;
+      }
+      
+      // Animação de sucesso e redirecionamento
+      const button = e.target;
+      button.textContent = 'Criando conta...';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        window.location.href = 'sms-confirmation.html';
+      }, 1000);
+    });
+    
+    // Smooth transition for login link
+    document.getElementById('login-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.body.style.opacity = '0';
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 300);
+    });
+    
+    // Animação ao carregar
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+    });
+    
+    // Previne zoom em dispositivos iOS
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+  </script>
+</body>
+</html>

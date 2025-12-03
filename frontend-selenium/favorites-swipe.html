@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Meus Favoritos</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <script>tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#39E079", "background-light": "#f6f8f7", "background-dark": "#122017", "text-main": "#212529", "text-secondary": "#6C757D", "action-destructive": "#DC3545"}, fontFamily: {display: "Manrope"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+  <style>
+    .swipe-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .swipe-content {
+      position: relative;
+      z-index: 10;
+      transition: transform 0.3s ease-out;
+      background: inherit;
+    }
+
+    .swipe-action {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-out;
+    }
+
+    .swipe-container:focus-within .swipe-content,
+    .swipe-container:hover .swipe-content {
+      transform: translateX(-80px); /* Adjust this value to match button width */
+    }
+
+    .swipe-container:focus-within .swipe-action,
+    .swipe-container:hover .swipe-action {
+      transform: translateX(0);
+    }
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        line-height: 1;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-main dark:text-white flex items-center justify-center min-h-screen">
+  <div class="mobile-container relative w-[390px] min-h-[844px] mx-auto flex flex-col overflow-hidden rounded-2xl shadow-lg bg-background-light dark:bg-background-dark group/design-root">
+    <!-- Top App Bar -->
+    <header class="sticky top-0 z-20 flex items-center justify-between bg-background-light dark:bg-background-dark p-4 shadow-sm">
+      <button class="flex size-10 shrink-0 items-center justify-center rounded-full text-text-main dark:text-white" onclick="navigateBack()">
+        <span class="material-symbols-outlined text-2xl">arrow_back</span>
+      </button>
+      <h1 class="flex-1 text-center text-lg font-bold leading-tight tracking-tight">Meus Favoritos</h1>
+      <button class="flex size-10 shrink-0 items-center justify-center rounded-full text-text-main dark:text-white" onclick="window.location.href='home.html'">
+        <span class="material-symbols-outlined text-2xl">home</span>
+      </button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 px-4 py-2">
+      <!-- Property List -->
+      <div class="flex flex-col gap-4">
+        <!-- Property Card 1 with Swipe Action -->
+        <div class="swipe-container rounded-xl bg-white dark:bg-gray-800 shadow-md">
+          <div class="swipe-action w-[80px]">
+            <button class="flex size-full flex-col items-center justify-center gap-1 bg-action-destructive text-white" onclick="deleteProperty('property1')">
+              <span class="material-symbols-outlined">delete</span>
+              <span class="text-xs font-semibold">Deletar</span>
+            </button>
+          </div>
+          <div class="swipe-content flex items-stretch gap-4 p-3 dark:bg-gray-800 cursor-pointer" onclick="navigateToProperty('property1')">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 bg-center bg-no-repeat bg-cover rounded-lg" style='background-image: url("https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20apartment%20interior%202%20bedroom%20bright%20clean%20stylish&image_size=square");'></div>
+            <div class="flex flex-1 flex-col justify-center gap-1 py-1">
+              <div class="flex items-center justify-between">
+                <p class="text-base font-bold leading-tight text-text-main dark:text-gray-100">Apartamento Moderno</p>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900 px-2 py-0.5 text-xs font-semibold text-green-800 dark:text-green-200">
+                  <span class="size-1.5 rounded-full bg-green-500"></span>
+                  Disponível
+                </span>
+              </div>
+              <p class="text-sm font-normal leading-normal text-text-secondary dark:text-gray-400">Boa Vista, Recife - PE</p>
+              <p class="text-base font-bold text-primary">R$ 2.300/mês</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Card 2 with Swipe Action -->
+        <div class="swipe-container rounded-xl bg-white dark:bg-gray-800 shadow-md">
+          <div class="swipe-action w-[80px]">
+            <button class="flex size-full flex-col items-center justify-center gap-1 bg-action-destructive text-white" onclick="deleteProperty('property2')">
+              <span class="material-symbols-outlined">delete</span>
+              <span class="text-xs font-semibold">Deletar</span>
+            </button>
+          </div>
+          <div class="swipe-content flex items-stretch gap-4 p-3 dark:bg-gray-800 cursor-pointer" onclick="navigateToProperty('property2')">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 bg-center bg-no-repeat bg-cover rounded-lg" style='background-image: url("https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Cozy%20house%20interior%20warm%20lighting%20wooden%20furniture%20inviting%20atmosphere&image_size=square");'></div>
+            <div class="flex flex-1 flex-col justify-center gap-1 py-1">
+              <div class="flex items-center justify-between">
+                <p class="text-base font-bold leading-tight text-text-main dark:text-gray-100">Casa Aconchegante</p>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-yellow-100 dark:bg-yellow-900 px-2 py-0.5 text-xs font-semibold text-yellow-800 dark:text-yellow-200">
+                  <span class="size-1.5 rounded-full bg-yellow-500"></span>
+                  Ocupado
+                </span>
+              </div>
+              <p class="text-sm font-normal leading-normal text-text-secondary dark:text-gray-400">Casa Forte, Recife - PE</p>
+              <p class="text-base font-bold text-primary">R$ 3.500/mês</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Property Card 3 with Swipe Action -->
+        <div class="swipe-container rounded-xl bg-white dark:bg-gray-800 shadow-md">
+          <div class="swipe-action w-[80px]">
+            <button class="flex size-full flex-col items-center justify-center gap-1 bg-action-destructive text-white" onclick="deleteProperty('property3')">
+              <span class="material-symbols-outlined">delete</span>
+              <span class="text-xs font-semibold">Deletar</span>
+            </button>
+          </div>
+          <div class="swipe-content flex items-stretch gap-4 p-3 dark:bg-gray-800 cursor-pointer" onclick="navigateToProperty('property3')">
+            <div class="w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 bg-center bg-no-repeat bg-cover rounded-lg" style='background-image: url("https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20loft%20interior%20high%20ceilings%20large%20windows%20brick%20walls%20industrial%20style&image_size=square");'></div>
+            <div class="flex flex-1 flex-col justify-center gap-1 py-1">
+              <div class="flex items-center justify-between">
+                <p class="text-base font-bold leading-tight text-text-main dark:text-gray-100">Loft Moderno no Centro</p>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900 px-2 py-0.5 text-xs font-semibold text-green-800 dark:text-green-200">
+                  <span class="size-1.5 rounded-full bg-green-500"></span>
+                  Disponível
+                </span>
+              </div>
+              <p class="text-sm font-normal leading-normal text-text-secondary dark:text-gray-400">Carmo, Olinda - PE</p>
+              <p class="text-base font-bold text-primary">R$ 2.900/mês</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty State (Uncomment to view) -->
+      <!--
+      <div class="flex flex-col px-4 py-12">
+        <div class="flex flex-col items-center gap-6 text-center">
+          <div class="text-7xl text-primary/50 dark:text-primary/70">
+            <span class="material-symbols-outlined !text-7xl">favorite</span>
+          </div>
+          <div class="flex max-w-xs flex-col items-center gap-2">
+            <p class="text-lg font-bold leading-tight tracking-tight text-text-main dark:text-gray-100">Nenhum favorito ainda</p>
+            <p class="text-sm font-normal leading-normal text-text-secondary dark:text-gray-400">
+              Você ainda não favoritou nenhuma propriedade. Toque no ícone de coração para começar!
+            </p>
+          </div>
+          <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-11 px-6 bg-primary text-white text-sm font-bold leading-normal tracking-wide shadow-lg shadow-primary/30">
+            <span class="truncate">Explorar Propriedades</span>
+          </button>
+        </div>
+      </div>
+      -->
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="flex shrink-0 gap-2 border-t border-zinc-200 dark:border-zinc-800 bg-background-light dark:bg-background-dark px-4 pb-3 pt-2">
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="home.html">
+        <span class="material-symbols-outlined flex h-8 items-center justify-center">home</span>
+        <p class="text-xs font-medium leading-normal tracking-[0.015em]">Início</p>
+      </a>
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="listings.html">
+        <span class="material-symbols-outlined flex h-8 items-center justify-center">search</span>
+        <p class="text-xs font-medium leading-normal tracking-[0.015em]">Busca</p>
+      </a>
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary dark:text-primary" href="favorites-swipe.html">
+        <span class="material-symbols-outlined fill flex h-8 items-center justify-center">favorite</span>
+        <p class="text-xs font-bold leading-normal tracking-[0.015em]">Salvos</p>
+      </a>
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="messages.html">
+        <span class="material-symbols-outlined flex h-8 items-center justify-center">chat_bubble</span>
+        <p class="text-xs font-medium leading-normal tracking-[0.015em]">Chats</p>
+      </a>
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="#">
+        <span class="material-symbols-outlined flex h-8 items-center justify-center">person</span>
+        <p class="text-xs font-medium leading-normal tracking-[0.015em]">Perfil</p>
+      </a>
+    </nav>
+  </div>
+
+  <script>
+    // Theme detection and setup
+    function setupTheme() {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.className = isDark ? 'dark' : 'light';
+    }
+
+    // Navigation functions
+    function navigateBack() {
+      window.history.back();
+    }
+
+    function navigateToProperty(propertyId) {
+      window.location.href = 'property-details.html?id=' + propertyId;
+    }
+
+    function deleteProperty(propertyId) {
+      event.stopPropagation();
+      const card = event.target.closest('.swipe-container');
+      
+      // Add fade out animation
+      card.style.transition = 'opacity 0.3s ease-out';
+      card.style.opacity = '0';
+      
+      // Remove card after animation
+      setTimeout(() => {
+        card.remove();
+        
+        // Check if no cards left
+        const remainingCards = document.querySelectorAll('.swipe-container');
+        if (remainingCards.length === 0) {
+          // Show empty state or redirect to empty favorites page
+          window.location.href = 'favorites-swipe.html';
+        }
+      }, 300);
+    }
+
+    // Initialize theme on load
+    setupTheme();
+    
+    // Listen for theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setupTheme);
+  </script>
+</body>
+</html>

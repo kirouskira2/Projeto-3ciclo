@@ -1,0 +1,6 @@
+br\com\casaverde\service\ImovelService.class
+br\com\casaverde\service\VisitaService.class
+br\com\casaverde\model\Imovel.class
+br\com\casaverde\service\ClienteService.class
+br\com\casaverde\model\Cliente.class
+br\com\casaverde\model\Visita.class

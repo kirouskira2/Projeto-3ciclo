@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Confirmação por SMS</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <script>tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#39E079", "background-light": "#f6f8f7", "background-dark": "#122017", "text-light": "#0d141c", "text-dark": "#f5f7f8", "text-secondary-light": "#49739c", "text-secondary-dark": "#a0b3c4"}, fontFamily: {display: "Inter"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .otp-input { width: 3rem; height: 3.5rem; text-align: center; font-size: 1.5rem; border: 1px solid; border-radius: 0.5rem; transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; -moz-appearance: textfield; }
+    .otp-input::-webkit-outer-spin-button, .otp-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .otp-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(57, 224, 121, 0.3); border-color: #39E079; }
+    body { min-height: max(844px, 100dvh); }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in { animation: fadeIn 0.6s ease-out; }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark flex items-center justify-center min-h-screen">
+  <div class="mobile-container relative w-[390px] min-h-[844px] mx-auto flex flex-col overflow-hidden rounded-2xl shadow-lg bg-background-light dark:bg-background-dark group/design-root">
+    <!-- Top App Bar -->
+    <div class="flex items-center justify-between p-4">
+      <button aria-label="Voltar" class="flex size-10 items-center justify-center rounded-full transition-colors hover:bg-black/10 dark:hover:bg-white/10" id="back-button">
+        <span class="material-symbols-outlined text-2xl text-text-light dark:text-text-dark">arrow_back</span>
+      </button>
+      <div class="flex-1"></div>
+      <button aria-label="Fechar" class="flex size-10 items-center justify-center rounded-full transition-colors hover:bg-black/10 dark:hover:bg-white/10" id="close-button">
+        <span class="material-symbols-outlined text-2xl text-text-light dark:text-text-dark">close</span>
+      </button>
+    </div>
+
+    <main class="flex flex-1 flex-col items-center justify-center p-4">
+      <div class="w-full max-w-sm text-center animate-fade-in">
+        <!-- Ícone -->
+        <div class="mb-6 flex justify-center">
+          <div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+            <span class="material-symbols-outlined text-4xl text-primary">phonelink_lock</span>
+          </div>
+        </div>
+
+        <!-- Título -->
+        <h1 class="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark">Confirme seu celular</h1>
+        <!-- Subtítulo -->
+        <p class="mt-3 text-base text-text-secondary-light dark:text-text-secondary-dark">Digite o código de 6 dígitos que enviamos para<br/>+55 ** *****-1234.</p>
+
+        <!-- Código de confirmação -->
+        <div class="mt-8">
+          <fieldset class="relative flex justify-center gap-3 sm:gap-4">
+            <input aria-label="Dígito 1" class="otp-input bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 focus:border-primary dark:focus:border-primary text-text-light dark:text-text-dark" maxlength="1" type="number"/>
+            <input aria-label="Dígito 2" class="otp-input bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 focus:border-primary dark:focus:border-primary text-text-light dark:text-text-dark" maxlength="1" type="number"/>
+            <input aria-label="Dígito 3" class="otp-input bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 focus:border-primary dark:focus:border-primary text-text-light dark:text-text-dark" maxlength="1" type="number"/>
+            <input aria-label="Dígito 4" class="otp-input bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 focus:border-primary dark:focus:border-primary text-text-light dark:text-text-dark" maxlength="1" type="number"/>
+            <input aria-label="Dígito 5" class="otp-input bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 focus:border-primary dark:focus:border-primary text-text-light dark:text-text-dark" maxlength="1" type="number"/>
+            <input aria-label="Dígito 6" class="otp-input bg-background-light dark:bg-background-dark border-gray-300 dark:border-gray-600 focus:border-primary dark:focus:border-primary text-text-light dark:text-text-dark" maxlength="1" type="number"/>
+          </fieldset>
+        </div>
+        <!-- Reenviar -->
+        <p class="mt-8 text-sm text-text-secondary-light dark:text-text-secondary-dark">Não recebeu o código? <a class="font-bold text-primary hover:underline" href="#" id="resend-link">Reenviar</a></p>
+      </div>
+    </main>
+
+    <!-- Footer Button -->
+    <footer class="w-full p-4 border-t border-gray-200 dark:border-gray-700 bg-background-light dark:bg-background-dark">
+      <div class="flex w-full max-w-sm mx-auto">
+        <button id="confirm-button" class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 flex-1 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50">
+          <span class="truncate">Confirmar</span>
+        </button>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Dark mode automático
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.remove('light');
+      document.documentElement.classList.add('dark');
+    }
+
+    // Navegação entre inputs OTP
+    const inputs = Array.from(document.querySelectorAll('.otp-input'));
+    inputs.forEach((input, i) => {
+      input.addEventListener('input', (e) => {
+        const v = input.value.replace(/\D/g, '').slice(0,1);
+        input.value = v;
+        if (v && i < inputs.length - 1) inputs[i+1].focus();
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !input.value && i > 0) inputs[i-1].focus();
+        if (e.key === 'ArrowLeft' && i > 0) inputs[i-1].focus();
+        if (e.key === 'ArrowRight' && i < inputs.length - 1) inputs[i+1].focus();
+      });
+    });
+
+    // Botões de navegação
+    document.getElementById('back-button').addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+    document.getElementById('close-button').addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+
+    // Reenviar código (feedback)
+    document.getElementById('resend-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      const link = e.target;
+      link.textContent = 'Código reenviado!';
+      link.classList.add('opacity-70');
+      setTimeout(() => { link.textContent = 'Reenviar'; link.classList.remove('opacity-70'); }, 2000);
+    });
+
+    // Confirmar código
+    document.getElementById('confirm-button').addEventListener('click', () => {
+      const code = inputs.map(i => i.value).join('');
+      if (code.length !== 6) {
+        alert('Digite os 6 dígitos do código.');
+        return;
+      }
+      // Sucesso e redirecionamento para home
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = 'home.html'; }, 300);
+    });
+  </script>

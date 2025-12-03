@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+
+    <title>Filtros de Busca</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#39E079",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#122017"
+                    },
+                    fontFamily: {
+                        display: "Inter"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        body {
+            min-height: max(884px, 100dvh);
+            background: linear-gradient(135deg, #f6f8f7 0%, #e8f5e8 100%);
+        }
+        
+        .dark body {
+            background: linear-gradient(135deg, #122017 0%, #1a2e1f 100%);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-slideInRight {
+            animation: slideInRight 0.4s ease-out forwards;
+        }
+        
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .page-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        
+        .page-exit {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        /* Custom range slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-webkit-slider-track {
+            background: #e5e7eb;
+            height: 4px;
+            border-radius: 2px;
+        }
+        
+        .dark input[type="range"]::-webkit-slider-track {
+            background: #374151;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #39E079;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .dark input[type="range"]::-webkit-slider-thumb {
+            border-color: #1f2937;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200">
+    <div class="mobile-container relative w-[390px] min-h-[844px] mx-auto flex flex-col overflow-hidden rounded-2xl shadow-lg group/design-root">
+        
+        <!-- Top App Bar -->
+        <div class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800 backdrop-blur-sm">
+            <a href="home.html" class="text-gray-800 dark:text-gray-200 flex size-10 shrink-0 items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-smooth">
+                <span class="material-symbols-outlined text-2xl">arrow_back</span>
+            </a>
+            <h2 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Filtros</h2>
+            <div class="flex size-10 shrink-0 items-center"></div>
+        </div>
+        
+        <div class="flex-grow pb-32">
+            
+            <!-- Property Type Section -->
+            <div class="animate-fadeInUp">
+                <h3 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-6">Tipo de Imóvel</h3>
+                <div class="flex gap-3 px-4 flex-wrap">
+                    <div onclick="selectPropertyType(this, 'house')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-primary pl-4 pr-4 transition-smooth hover:bg-primary/90">
+                        <p class="text-white text-sm font-medium leading-normal">Casa</p>
+                    </div>
+                    <div onclick="selectPropertyType(this, 'apartment')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 pl-4 pr-4 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                        <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">Apartamento</p>
+                    </div>
+                    <div onclick="selectPropertyType(this, 'condo')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 pl-4 pr-4 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                        <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">Cobertura</p>
+                    </div>
+                    <div onclick="selectPropertyType(this, 'townhouse')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 pl-4 pr-4 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                        <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">Sobrado</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Price Range Section -->
+            <div class="animate-fadeInUp" style="animation-delay: 0.1s;">
+                <h3 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-6">Faixa de Preço</h3>
+                <div class="px-4 pt-4">
+                    <!-- Price Display -->
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-center">
+                            <p class="text-gray-600 dark:text-gray-400 text-sm font-normal">Mínimo</p>
+                            <p id="minPriceDisplay" class="text-gray-900 dark:text-gray-100 text-lg font-bold">R$ 100.000</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-gray-600 dark:text-gray-400 text-sm font-normal">Máximo</p>
+                            <p id="maxPriceDisplay" class="text-gray-900 dark:text-gray-100 text-lg font-bold">R$ 2.000.000</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Dual Range Slider -->
+                    <div class="slider-container relative mb-6">
+                        <input type="range" id="minPriceSlider" min="50000" max="5000000" step="50000" value="100000" 
+                               class="absolute w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                               oninput="updatePriceRange()">
+                        <input type="range" id="maxPriceSlider" min="50000" max="5000000" step="50000" value="2000000" 
+                               class="absolute w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                               oninput="updatePriceRange()">
+                    </div>
+                    
+                    <!-- Quick Price Selection -->
+                    <div class="flex gap-2 flex-wrap">
+                        <button onclick="setQuickPrice(100000, 500000)" class="flex h-8 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 px-3 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-xs font-medium">100k - 500k</p>
+                        </button>
+                        <button onclick="setQuickPrice(500000, 1000000)" class="flex h-8 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 px-3 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-xs font-medium">500k - 1M</p>
+                        </button>
+                        <button onclick="setQuickPrice(1000000, 2000000)" class="flex h-8 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 px-3 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-xs font-medium">1M - 2M</p>
+                        </button>
+                        <button onclick="setQuickPrice(2000000, 5000000)" class="flex h-8 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 px-3 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-xs font-medium">2M+</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beds & Baths Section -->
+            <div class="animate-fadeInUp" style="animation-delay: 0.2s;">
+                <h3 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-12">Quartos &amp; Banheiros</h3>
+                <div class="px-4">
+                    <p class="text-gray-600 dark:text-gray-400 text-base font-medium leading-normal mb-3">Quartos</p>
+                    <div class="flex gap-3 flex-wrap">
+                        <div onclick="selectBedrooms(this, 'any')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 w-16 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">Qualquer</p>
+                        </div>
+                        <div onclick="selectBedrooms(this, '1')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 w-16 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">1</p>
+                        </div>
+                        <div onclick="selectBedrooms(this, '2')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-primary w-16 transition-smooth hover:bg-primary/90">
+                            <p class="text-white text-sm font-medium leading-normal">2</p>
+                        </div>
+                        <div onclick="selectBedrooms(this, '3')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 w-16 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">3</p>
+                        </div>
+                        <div onclick="selectBedrooms(this, '4+')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 w-16 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">4+</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-4 pt-4">
+                    <p class="text-gray-600 dark:text-gray-400 text-base font-medium leading-normal mb-3">Banheiros</p>
+                    <div class="flex gap-3 flex-wrap">
+                        <div onclick="selectBathrooms(this, 'any')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-primary w-16 transition-smooth hover:bg-primary/90">
+                            <p class="text-white text-sm font-medium leading-normal">Qualquer</p>
+                        </div>
+                        <div onclick="selectBathrooms(this, '1+')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 w-16 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">1+</p>
+                        </div>
+                        <div onclick="selectBathrooms(this, '2+')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 w-16 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">2+</p>
+                        </div>
+                        <div onclick="selectBathrooms(this, '3+')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 w-16 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">3+</p>
+                        </div>
+                        <div onclick="selectBathrooms(this, '4+')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-lg bg-gray-200 dark:bg-gray-700 w-16 transition-smooth hover:bg-gray-300 dark:hover:bg-gray-600">
+                            <p class="text-gray-800 dark:text-gray-200 text-sm font-medium leading-normal">4+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Square Feet Section -->
+            <div class="animate-fadeInUp" style="animation-delay: 0.3s;">
+                <h3 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-8">Metragem</h3>
+                <div class="flex items-center gap-4 px-4">
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="min-sqft">Mínimo</label>
+                        <input class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 shadow-sm focus:border-primary focus:ring-primary sm:text-sm text-gray-900 dark:text-gray-100 transition-smooth" id="min-sqft" placeholder="Mín m²" type="number" value="80"/>
+                    </div>
+                    <div class="mt-6 text-gray-400">-</div>
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="max-sqft">Máximo</label>
+                        <input class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 shadow-sm focus:border-primary focus:ring-primary sm:text-sm text-gray-900 dark:text-gray-100 transition-smooth" id="max-sqft" placeholder="Máx m²" type="number" value="250"/>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Minimum Rating Section -->
+            <div class="animate-fadeInUp" style="animation-delay: 0.4s;">
+                <h3 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-8">Avaliação Mínima</h3>
+                <div class="flex items-center gap-1 px-4" id="rating-container">
+                    <span class="material-symbols-outlined text-3xl cursor-pointer hover:scale-110 transition-smooth" style="color: #ffc107; font-variation-settings: 'FILL' 1;" onclick="setRating(1)">star</span>
+                    <span class="material-symbols-outlined text-3xl cursor-pointer hover:scale-110 transition-smooth" style="color: #ffc107; font-variation-settings: 'FILL' 1;" onclick="setRating(2)">star</span>
+                    <span class="material-symbols-outlined text-3xl cursor-pointer hover:scale-110 transition-smooth" style="color: #ffc107; font-variation-settings: 'FILL' 1;" onclick="setRating(3)">star</span>
+                    <span class="material-symbols-outlined text-3xl cursor-pointer hover:scale-110 transition-smooth" style="color: #ffc107;" onclick="setRating(4)">star</span>
+                    <span class="material-symbols-outlined text-3xl cursor-pointer hover:scale-110 transition-smooth text-gray-300 dark:text-gray-600" onclick="setRating(5)">star</span>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Sticky Footer -->
+        <div class="sticky bottom-0 bg-background-light dark:bg-background-dark p-4 border-t border-gray-200 dark:border-gray-800 shadow-lg">
+            <div class="flex items-center gap-4">
+                <button onclick="resetFilters()" class="flex-shrink-0 text-primary dark:text-primary-light font-semibold py-3 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-smooth">Limpar</button>
+                <button onclick="applyFilters()" class="flex-grow bg-primary text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-primary/90 transition-smooth">Mostrar 42 Imóveis</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation Bar -->
+        <nav class="flex shrink-0 gap-2 border-t border-zinc-200 dark:border-zinc-800 bg-background-light dark:bg-background-dark px-4 pb-3 pt-2">
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="home.html">
+            <span class="material-symbols-outlined flex h-8 items-center justify-center">home</span>
+            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Início</p>
+          </a>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary dark:text-primary" href="listings.html">
+            <span class="material-symbols-outlined fill flex h-8 items-center justify-center">search</span>
+            <p class="text-xs font-bold leading-normal tracking-[0.015em]">Busca</p>
+          </a>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="favorites-swipe.html">
+            <span class="material-symbols-outlined flex h-8 items-center justify-center">favorite</span>
+            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Salvos</p>
+          </a>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="messages.html">
+            <span class="material-symbols-outlined flex h-8 items-center justify-center">chat_bubble</span>
+            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Chats</p>
+          </a>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="#">
+            <span class="material-symbols-outlined flex h-8 items-center justify-center">person</span>
+            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Perfil</p>
+          </a>
+        </nav>
+        
+    </div>
+    
+    <script>
+        // Auto theme detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+        }
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (e.matches) {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            }
+        });
+        
+        // Filter state
+        let filters = {
+            propertyType: 'house',
+            bedrooms: '2',
+            bathrooms: 'any',
+            rating: 3
+        };
+        
+        // Property Type selection
+        function selectPropertyType(element, type) {
+            document.querySelectorAll('.flex.gap-3.px-4.flex-wrap > div').forEach(div => {
+                div.classList.remove('bg-primary');
+                div.classList.add('bg-gray-200', 'dark:bg-gray-700');
+                div.querySelector('p').classList.remove('text-white');
+                div.querySelector('p').classList.add('text-gray-800', 'dark:text-gray-200');
+            });
+            
+            element.classList.remove('bg-gray-200', 'dark:bg-gray-700');
+            element.classList.add('bg-primary');
+            element.querySelector('p').classList.remove('text-gray-800', 'dark:text-gray-200');
+            element.querySelector('p').classList.add('text-white');
+            
+            filters.propertyType = type;
+        }
+        
+        // Bedrooms selection
+        function selectBedrooms(element, bedrooms) {
+            const container = element.parentElement;
+            container.querySelectorAll('div').forEach(div => {
+                div.classList.remove('bg-primary');
+                div.classList.add('bg-gray-200', 'dark:bg-gray-700');
+                div.querySelector('p').classList.remove('text-white');
+                div.querySelector('p').classList.add('text-gray-800', 'dark:text-gray-200');
+            });
+            
+            element.classList.remove('bg-gray-200', 'dark:bg-gray-700');
+            element.classList.add('bg-primary');
+            element.querySelector('p').classList.remove('text-gray-800', 'dark:text-gray-200');
+            element.querySelector('p').classList.add('text-white');
+            
+            filters.bedrooms = bedrooms;
+        }
+        
+        // Bathrooms selection
+        function selectBathrooms(element, bathrooms) {
+            const container = element.parentElement;
+            container.querySelectorAll('div').forEach(div => {
+                div.classList.remove('bg-primary');
+                div.classList.add('bg-gray-200', 'dark:bg-gray-700');
+                div.querySelector('p').classList.remove('text-white');
+                div.querySelector('p').classList.add('text-gray-800', 'dark:text-gray-200');
+            });
+            
+            element.classList.remove('bg-gray-200', 'dark:bg-gray-700');
+            element.classList.add('bg-primary');
+            element.querySelector('p').classList.remove('text-gray-800', 'dark:text-gray-200');
+            element.querySelector('p').classList.add('text-white');
+            
+            filters.bathrooms = bathrooms;
+        }
+        
+        // Rating selection
+        function setRating(rating) {
+            const stars = document.querySelectorAll('#rating-container .material-symbols-outlined');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.style.color = '#ffc107';
+                    star.style.fontVariationSettings = "'FILL' 1";
+                } else {
+                    star.style.color = '';
+                    star.style.fontVariationSettings = "'FILL' 0";
+                }
+            });
+            filters.rating = rating;
+        }
+        
+        // Apply filters
+        function applyFilters() {
+            console.log('Applying filters:', filters);
+            
+            // Get min and max square footage
+            const minSqft = document.getElementById('min-sqft').value;
+            const maxSqft = document.getElementById('max-sqft').value;
+            
+            filters.minSqft = minSqft;
+            filters.maxSqft = maxSqft;
+            
+            // Navigate to listings page with filters
+            document.body.classList.add('page-exit');
+            setTimeout(() => {
+                window.location.href = 'listings.html';
+            }, 300);
+        }
+        
+        // Reset filters
+        function resetFilters() {
+            // Reset all selections
+            document.querySelectorAll('.flex.gap-3.px-4.flex-wrap > div').forEach(div => {
+                div.classList.remove('bg-primary');
+                div.classList.add('bg-gray-200', 'dark:bg-gray-700');
+                div.querySelector('p').classList.remove('text-white');
+                div.querySelector('p').classList.add('text-gray-800', 'dark:text-gray-200');
+            });
+            
+            // Reset bedrooms
+            document.querySelectorAll('.px-4').forEach(container => {
+                if (container.querySelector('.flex.gap-3.flex-wrap')) {
+                    container.querySelectorAll('.flex.gap-3.flex-wrap > div').forEach(div => {
+                        div.classList.remove('bg-primary');
+                        div.classList.add('bg-gray-200', 'dark:bg-gray-700');
+                        div.querySelector('p').classList.remove('text-white');
+                        div.querySelector('p').classList.add('text-gray-800', 'dark:text-gray-200');
+                    });
+                }
+            });
+            
+            // Reset form inputs
+            document.getElementById('min-sqft').value = '80';
+            document.getElementById('max-sqft').value = '250';
+            
+            // Reset rating
+            setRating(3);
+            
+            // Reset default selections
+            selectPropertyType(document.querySelector('.flex.gap-3.px-4.flex-wrap > div'), 'house');
+            selectBedrooms(document.querySelector('.px-4 .flex.gap-3.flex-wrap > div:nth-child(3)'), '2');
+            selectBathrooms(document.querySelector('.px-4 .flex.gap-3.flex-wrap > div:first-child'), 'any');
+        }
+        
+        // Smooth page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('page-transition');
+            setTimeout(() => {
+                document.body.classList.remove('page-exit');
+            }, 100);
+        });
+    </script>
+    
+</body>
+</html>

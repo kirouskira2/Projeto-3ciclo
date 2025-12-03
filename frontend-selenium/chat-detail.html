@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Chat com Ana Silva</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+  <script>tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#39E079", "background-light": "#f6f8f7", "background-dark": "#122017"}, fontFamily: {display: "Manrope"}, borderRadius: {DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px"}}}};</script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark flex items-center justify-center min-h-screen">
+  <div class="mobile-container relative w-[390px] min-h-[844px] mx-auto flex flex-col overflow-hidden rounded-2xl shadow-lg bg-background-light dark:bg-background-dark group/design-root">
+    <!-- Top App Bar -->
+    <header class="sticky top-0 z-10 flex shrink-0 items-center justify-between border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark px-4 py-3 shadow-sm">
+      <div class="flex items-center gap-2">
+        <button class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-gray-800 dark:text-gray-200" onclick="navigateBack()">
+          <span class="material-symbols-outlined text-2xl">arrow_back</span>
+        </button>
+        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Professional%20headshot%20portrait%20woman%20real%20estate%20agent%20smiling%20professional%20attire&image_size=square");'></div>
+        <div class="flex flex-col">
+          <h2 class="text-gray-900 dark:text-white text-base font-bold leading-tight tracking-[-0.01em]">Ana Silva</h2>
+          <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-tight">Apto 302, Ed. Central</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1">
+        <button class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-primary" onclick="makeCall()">
+          <span class="material-symbols-outlined text-2xl">call</span>
+        </button>
+        <button class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-primary" onclick="startVideoCall()">
+          <span class="material-symbols-outlined text-2xl">videocam</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Chat Area -->
+    <main class="flex-1 overflow-y-auto p-4 pb-16 space-y-6" id="chatArea">
+      <div class="text-center text-xs text-gray-500 dark:text-gray-400">Hoje, 10:30</div>
+      
+      <!-- Received Message -->
+      <div class="flex items-end gap-3">
+        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 shrink-0" style='background-image: url("https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Professional%20headshot%20portrait%20woman%20real%20estate%20agent%20smiling%20professional%20attire&image_size=square");'></div>
+        <div class="flex flex-1 flex-col gap-1 items-start">
+          <div class="flex max-w-[80%] flex-col gap-1">
+            <p class="text-base font-normal leading-normal rounded-xl rounded-bl-sm px-4 py-2.5 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-50">Olá! Gostaria de saber mais sobre o apartamento 302.</p>
+            <span class="text-xs text-gray-500 dark:text-gray-400 self-start">10:31</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sent Message -->
+      <div class="flex items-end gap-3 justify-end">
+        <div class="flex flex-1 flex-col gap-1 items-end">
+          <div class="flex max-w-[80%] flex-col gap-1">
+            <p class="text-base font-normal leading-normal rounded-xl rounded-br-sm px-4 py-2.5 bg-primary text-white">Claro! É um ótimo apartamento. O que você gostaria de saber especificamente?</p>
+            <div class="flex items-center gap-1 self-end">
+              <span class="text-xs text-gray-500 dark:text-gray-400">10:32</span>
+              <span class="material-symbols-outlined text-base text-primary">done_all</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Received Message -->
+      <div class="flex items-end gap-3">
+        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 shrink-0" style='background-image: url("https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Professional%20headshot%20portrait%20woman%20real%20estate%20agent%20smiling%20professional%20attire&image_size=square");'></div>
+        <div class="flex flex-1 flex-col gap-1 items-start">
+          <div class="flex max-w-[80%] flex-col gap-1">
+            <p class="text-base font-normal leading-normal rounded-xl rounded-bl-sm px-4 py-2.5 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-50">Qual o valor do aluguel e quais são as garantias aceitas?</p>
+            <span class="text-xs text-gray-500 dark:text-gray-400 self-start">10:33</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div class="flex items-end gap-3" id="typingIndicator" style="display: none;">
+        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 shrink-0" style='background-image: url("https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Professional%20headshot%20portrait%20woman%20real%20estate%20agent%20smiling%20professional%20attire&image_size=square");'></div>
+        <div class="flex flex-1 flex-col gap-1 items-start">
+          <div class="flex items-center gap-1.5 rounded-xl rounded-bl-sm px-4 py-2.5 bg-gray-200 dark:bg-gray-700">
+            <span class="h-2 w-2 animate-bounce rounded-full bg-gray-500 [animation-delay:-0.3s]"></span>
+            <span class="h-2 w-2 animate-bounce rounded-full bg-gray-500 [animation-delay:-0.15s]"></span>
+            <span class="h-2 w-2 animate-bounce rounded-full bg-gray-500"></span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Composer -->
+    <footer class="sticky bottom-0 z-10 flex shrink-0 items-center gap-3 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark px-4 py-3">
+      <div class="flex w-full flex-1 items-center rounded-xl bg-gray-100 dark:bg-gray-800">
+        <button class="flex h-10 w-10 shrink-0 items-center justify-center p-2 text-gray-500 dark:text-gray-400" onclick="addEmoji()">
+          <span class="material-symbols-outlined text-2xl">sentiment_satisfied</span>
+        </button>
+        <input class="form-input h-10 min-w-0 flex-1 resize-none border-none bg-transparent px-2 py-2.5 text-base font-normal leading-normal text-gray-900 dark:text-gray-50 placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none focus:ring-0" placeholder="Digite sua mensagem..." value="" id="messageInput" onkeypress="handleKeyPress(event)"/>
+        <button class="flex h-10 w-10 shrink-0 items-center justify-center p-2 text-gray-500 dark:text-gray-400" onclick="attachFile()">
+          <span class="material-symbols-outlined text-2xl">attach_file</span>
+        </button>
+      </div>
+      <button class="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary text-white" onclick="sendMessage()">
+        <span class="material-symbols-outlined text-2xl">send</span>
+      </button>
+    </footer>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="flex shrink-0 gap-2 border-t border-zinc-200 dark:border-zinc-800 bg-background-light dark:bg-background-dark px-4 pb-3 pt-2">
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="home.html">
+        <span class="material-symbols-outlined flex h-8 items-center justify-center">home</span>
+        <p class="text-xs font-medium leading-normal tracking-[0.015em]">Início</p>
+      </a>
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="listings.html">
+        <span class="material-symbols-outlined flex h-8 items-center justify-center">search</span>
+        <p class="text-xs font-medium leading-normal tracking-[0.015em]">Busca</p>
+      </a>
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="favorites-swipe.html">
+        <span class="material-symbols-outlined flex h-8 items-center justify-center">favorite</span>
+        <p class="text-xs font-medium leading-normal tracking-[0.015em]">Salvos</p>
+      </a>
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary dark:text-primary" href="messages.html">
+        <span class="material-symbols-outlined fill flex h-8 items-center justify-center">chat_bubble</span>
+        <p class="text-xs font-bold leading-normal tracking-[0.015em]">Chats</p>
+      </a>
+      <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="#">
+        <span class="material-symbols-outlined flex h-8 items-center justify-center">person</span>
+        <p class="text-xs font-medium leading-normal tracking-[0.015em]">Perfil</p>
+      </a>
+    </nav>
+  </div>
+
+  <script>
+    // Theme detection and setup
+    function setupTheme() {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.className = isDark ? 'dark' : 'light';
+    }
+
+    // Navigation functions
+    function navigateBack() {
+      window.history.back();
+    }
+
+    function makeCall() {
+      alert('Iniciando chamada...');
+    }
+
+    function startVideoCall() {
+      alert('Iniciando chamada de vídeo...');
+    }
+
+    // Chat functions
+    function sendMessage() {
+      const input = document.getElementById('messageInput');
+      const message = input.value.trim();
+      
+      if (message === '') return;
+      
+      // Add sent message to chat
+      const chatArea = document.getElementById('chatArea');
+      const now = new Date();
+      const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+      
+      const messageHTML = `
+        <div class="flex items-end gap-3 justify-right">
+          <div class="flex flex-1 flex-col gap-1 items-end">
+            <div class="flex max-w-[80%] flex-col gap-1">
+              <p class="text-base font-normal leading-normal rounded-xl rounded-br-sm px-4 py-2.5 bg-primary text-white">${message}</p>
+              <div class="flex items-center gap-1 self-end">
+                <span class="text-xs text-gray-500 dark:text-gray-400">${timeString}</span>
+                <span class="material-symbols-outlined text-base text-primary">done</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Remove typing indicator if exists
+      const typingIndicator = document.getElementById('typingIndicator');
+      if (typingIndicator) {
+        chatArea.insertAdjacentHTML('beforeend', messageHTML);
+      } else {
+        chatArea.insertAdjacentHTML('beforeend', messageHTML);
+      }
+      
+      // Clear input
+      input.value = '';
+      
+      // Scroll to bottom
+      chatArea.scrollTop = chatArea.scrollHeight;
+      
+      // Simulate typing indicator
+      setTimeout(() => {
+        showTypingIndicator();
+      }, 1000);
+      
+      // Simulate response
+      setTimeout(() => {
+        hideTypingIndicator();
+        addReceivedMessage('Obrigado pela informação! Vou verificar e te respondo em breve.');
+      }, 3000);
+    }
+
+    function showTypingIndicator() {
+      const typingIndicator = document.getElementById('typingIndicator');
+      if (typingIndicator) {
+        typingIndicator.style.display = 'flex';
+        const chatArea = document.getElementById('chatArea');
+        chatArea.scrollTop = chatArea.scrollHeight;
+      }
+    }
+
+    function hideTypingIndicator() {
+      const typingIndicator = document.getElementById('typingIndicator');
+      if (typingIndicator) {
+        typingIndicator.style.display = 'none';
+      }
+    }
+
+    function addReceivedMessage(message) {
+      const chatArea = document.getElementById('chatArea');
+      const now = new Date();
+      const timeString = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+      
+      const messageHTML = `
+        <div class="flex items-end gap-3">
+          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full w-8 h-8 shrink-0" style='background-image: url("https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Professional%20headshot%20portrait%20woman%20real%20estate%20agent%20smiling%20professional%20attire&image_size=square");'></div>
+          <div class="flex flex-1 flex-col gap-1 items-start">
+            <div class="flex max-w-[80%] flex-col gap-1">
+              <p class="text-base font-normal leading-normal rounded-xl rounded-bl-sm px-4 py-2.5 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-50">${message}</p>
+              <span class="text-xs text-gray-500 dark:text-gray-400 self-start">${timeString}</span>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      chatArea.insertAdjacentHTML('beforeend', messageHTML);
+      chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    }
+
+    function addEmoji() {
+      // Simple emoji picker - in a real app, you'd use a proper emoji picker library
+      const emojis = ['😀', '😂', '😍', '🤔', '👍', '❤️', '🏠', '📱'];
+      const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+      const input = document.getElementById('messageInput');
+      input.value += randomEmoji;
+      input.focus();
+    }
+
+    function attachFile() {
+      alert('Anexar arquivo - funcionalidade em desenvolvimento');
+    }
+
+    // Initialize theme on load
+    setupTheme();
+    
+    // Listen for theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setupTheme);
+    
+    // Focus on input when page loads
+    document.getElementById('messageInput').focus();
+  </script>
+</body>
+</html>

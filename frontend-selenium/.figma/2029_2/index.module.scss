@@ -1,0 +1,192 @@
+* {
+  box-sizing: border-box;
+}
+
+.sPlash {
+  position: relative;
+  background: #ffffff;
+  width: 414px;
+  height: 896px;
+  overflow: hidden;
+
+  .bg {
+    display: flex;
+    position: absolute;
+    top: -80px;
+    left: -182px;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0.7;
+    padding-right: 12px;
+    padding-left: 74px;
+    width: 682px;
+    height: 1151px;
+
+    .autoWrapper {
+      position: relative;
+      margin-left: 293px;
+      width: 303px;
+      height: 303px;
+
+      .ellipse15 {
+        position: absolute;
+        right: -12px;
+        bottom: -121px;
+        opacity: 0.2;
+        border: 4px dashed #ffffff;
+        border-radius: 50%;
+        width: 250px;
+        height: 250px;
+      }
+
+      .ellipse13 {
+        position: absolute;
+        top: 37px;
+        left: 38px;
+        border-radius: 50%;
+        width: 228px;
+        height: 228px;
+        background-image: linear-gradient(
+          34.7deg,
+          #ffffff66 -13.72%,
+          #ffd7e51a 46.09%
+        );
+      }
+
+      .ellipse14 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        background: var(--verde-bk);
+        width: 303px;
+        height: 303px;
+        background-image: linear-gradient(
+          31.27deg,
+          #4caf504d -43.12%,
+          #008248d4 117.5%
+        );
+      }
+    }
+
+    .autoWrapper2 {
+      position: relative;
+      margin-top: 380px;
+      width: 467px;
+      height: 467px;
+
+      .group287 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 467px;
+        height: 467px;
+
+        .ellipse17 {
+          position: absolute;
+          top: 80px;
+          left: 81px;
+          border-radius: 50%;
+          width: 307px;
+          height: 307px;
+          rotate: 9deg;
+          background-image: linear-gradient(
+            31.27deg,
+            #4caf504d -43.12%,
+            #008248d4 117.5%
+          );
+        }
+
+        .ellipse18 {
+          position: absolute;
+          top: 30px;
+          left: 30px;
+          border-radius: 50%;
+          width: 408px;
+          height: 408px;
+          rotate: 9deg;
+          background-image: linear-gradient(
+            31.27deg,
+            #4caf504d -43.12%,
+            #008248d4 117.5%
+          );
+        }
+      }
+
+      .ellipse16 {
+        position: absolute;
+        top: -50px;
+        left: -74px;
+        opacity: 0.3;
+        border: 4px dashed #ffffff;
+        border-radius: 50%;
+        width: 339px;
+        height: 339px;
+      }
+    }
+  }
+
+  .iPhoneXStatusBarsSta {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: flex-start;
+    padding: 13px 22px 10px 21px;
+    width: 414px;
+    height: 44px;
+
+    .timeStyle {
+      display: flex;
+      align-items: flex-start;
+      padding-top: 3px;
+      padding-bottom: 1px;
+
+      .aTime3 {
+        width: 54px;
+        text-align: center;
+        color: #ffffff;
+        font-family: SFProText, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+
+        .aTime {
+          letter-spacing: -0.28px;
+          color: #ffffff;
+          font-family: SFProText, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .aTime2 {
+          letter-spacing: 0;
+          color: #ffffff;
+          font-family: SFProText, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+          font-size: 14px;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .cellularConnection {
+      margin-top: 5px;
+      margin-left: 251px;
+      width: 17px;
+      height: 11px;
+    }
+
+    .wifi {
+      margin-top: 4px;
+      margin-left: 5px;
+      width: 15px;
+      height: 11px;
+    }
+
+    .battery {
+      margin-top: 4px;
+      margin-left: 5px;
+      width: 24px;
+      height: 11px;
+    }
+  }
+}

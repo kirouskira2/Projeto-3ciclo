@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+
+    <title>Imóveis - Página Inicial</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#39E079",
+                        accent: "#48D1CC",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#122017",
+                        "neutral-text": "#6C757D",
+                        "neutral-border": "#E9ECEF"
+                    },
+                    fontFamily: {
+                        display: "Inter"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        body {
+            min-height: max(884px, 100dvh);
+            background: linear-gradient(135deg, #f6f8f7 0%, #e8f5e8 100%);
+        }
+        
+        .dark body {
+            background: linear-gradient(135deg, #122017 0%, #1a2e1f 100%);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-slideUp {
+            animation: slideUp 0.6s ease-out forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .page-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        
+        .page-exit {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+    </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 flex items-center justify-center min-h-screen">
+    <div class="mobile-container relative w-[390px] min-h-[844px] mx-auto flex flex-col overflow-hidden rounded-2xl shadow-lg bg-background-light dark:bg-background-dark group/design-root">
+      <div class="relative flex h-full w-full flex-col group/design-root overflow-x-hidden">
+        
+        <!-- Top App Bar -->
+        <header class="flex flex-col gap-2 bg-green-200 p-4 pb-2 sticky top-0 z-10 backdrop-blur-sm">
+            <div class="flex items-center h-12 justify-center relative">
+                <div class="flex items-center gap-2 justify-center">
+                    <span class="material-symbols-outlined text-primary dark:text-accent text-2xl">location_on</span>
+                    <p class="text-neutral-text dark:text-neutral-border text-sm font-medium">Recife, PE</p>
+                </div>
+                <div class="absolute right-0 flex w-12 items-center justify-end">
+                    <button onclick="handleNotification()" class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-transparent text-primary dark:text-accent hover:bg-primary/10 dark:hover:bg-accent/10 transition-smooth">
+                        <span class="material-symbols-outlined text-2xl">notifications</span>
+                    </button>
+                </div>
+            </div>
+            <p class="text-slate-800 dark:text-white tracking-light text-[28px] font-bold leading-tight animate-fadeIn">Olá, Pamela Oliveira!</p>
+        </header>
+        
+        <main class="flex-grow">
+        <!-- Search Bar & Filter -->
+        <div class="px-4 py-3 flex items-center gap-3 animate-slideUp delay-100 bg-green-200">
+            <label class="flex flex-col min-w-40 h-12 w-full">
+                <div class="flex w-full flex-1 items-stretch rounded-lg h-full shadow-sm transition-smooth hover:shadow-md">
+                    <div class="text-white flex border-none bg-primary items-center justify-center pl-4 rounded-l-lg border-r-0">
+                        <span class="material-symbols-outlined">search</span>
+                    </div>
+                    <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-0 border-neutral-border dark:border-neutral-text/30 bg-white dark:bg-background-dark focus:border-primary h-full placeholder:text-neutral-text px-4 text-base font-normal leading-normal transition-smooth" placeholder="Buscar por cidade, endereço, CEP..." onkeypress="handleSearch(event)"/>
+                </div>
+            </label>
+            <a href="filter.html" class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-lg bg-accent text-white shadow-sm hover:bg-accent/90 transition-smooth">
+                <span class="material-symbols-outlined">tune</span>
+            </a>
+        </div>
+        
+        <!-- Chips / Categories -->
+        <div class="flex gap-3 px-4 py-3 overflow-x-auto whitespace-nowrap animate-slideUp delay-200 bg-green-200">
+            <div onclick="selectCategory(this, 'sale')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-primary/20 dark:bg-accent/20 px-4 transition-smooth hover:bg-primary/30">
+                <span class="material-symbols-outlined text-primary dark:text-accent text-xl">home</span>
+                <p class="text-white text-sm font-semibold leading-normal">À Venda</p>
+            </div>
+            <div onclick="selectCategory(this, 'rent')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-neutral-border dark:bg-neutral-text/30 px-4 transition-smooth hover:bg-neutral-border/80">
+                <span class="material-symbols-outlined text-neutral-text dark:text-neutral-border text-xl">key</span>
+                <p class="text-neutral-text dark:text-neutral-border text-sm font-medium leading-normal">Para Alugar</p>
+            </div>
+            <div onclick="selectCategory(this, 'new')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-neutral-border dark:bg-neutral-text/30 px-4 transition-smooth hover:bg-neutral-border/80">
+                <span class="material-symbols-outlined text-neutral-text dark:text-neutral-border text-xl">construction</span>
+                <p class="text-neutral-text dark:text-neutral-border text-sm font-medium leading-normal">Novos</p>
+            </div>
+            <div onclick="selectCategory(this, 'land')" class="flex h-10 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-neutral-border dark:bg-neutral-text/30 px-4 transition-smooth hover:bg-neutral-border/80">
+                <span class="material-symbols-outlined text-neutral-text dark:text-neutral-border text-xl">landscape</span>
+                <p class="text-neutral-text dark:text-neutral-border text-sm font-medium leading-normal">Terrenos</p>
+            </div>
+        </div>
+        
+        <!-- Recommended for You Section -->
+         <section class="py-4 animate-slideUp delay-300 bg-green-200">
+            <h2 class="text-slate-800 dark:text-white text-xl font-bold leading-tight tracking-tight px-4 pb-3 pt-2">Recomendados para Você</h2>
+            <div class="flex gap-4 overflow-x-auto px-4 pb-2">
+                
+                <!-- Recommended Card 1 -->
+                <div onclick="goToProperty('property-details.html')" class="flex-shrink-0 w-[280px] bg-white dark:bg-neutral-text/20 rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-smooth hover:scale-105">
+                    <div class="relative">
+                        <img alt="Casa moderna no subúrbio com garagem para dois carros" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNWsSd0FGYVFTRlnItkNVw7kdy9MQN0DUW1qhCd8DJORnVdYqDVUWYiOOMJey_C5MU4bOKu2uSusZYEEjovMTB7T3q2MGBO343ouE32ZyZaDbfIj3qVlMVeID3WZE32Y6vcCjTT6jxmn4g0wjGCJ-64ACIN_gLkKsRlwp9Mo-WpX53tL9iVPkN5-CTa3o9QHTy5jVOehEpfU75Jk7LsztxiPbGFwqx3xKwiRh8KaIKZAkDeTbxNnYL3rjhUXuATysFzVh-IbVltHE7"/>
+                        <button onclick="toggleFavorite(event, this)" class="absolute top-3 right-3 flex items-center justify-center h-8 w-8 rounded-full bg-black/40 text-white hover:bg-black/60 transition-smooth">
+                            <span class="material-symbols-outlined text-xl">favorite_border</span>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-lg font-bold text-primary dark:text-accent">R$ 850.000</p>
+                        <p class="text-base font-semibold text-slate-800 dark:text-white mt-1">Rua das Flores, 123</p>
+                        <p class="text-sm text-neutral-text dark:text-neutral-border">Recife, PE</p>
+                        <div class="flex items-center gap-4 text-neutral-text dark:text-neutral-border mt-3 text-sm">
+                            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">bed</span> 4</span>
+                            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">bathtub</span> 3</span>
+                            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">square_foot</span> 220m²</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recommended Card 2 -->
+                <div onclick="goToProperty('property-details.html')" class="flex-shrink-0 w-[280px] bg-white dark:bg-neutral-text/20 rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-smooth hover:scale-105">
+                    <div class="relative">
+                        <img alt="Casa contemporânea de dois andares com grandes janelas" class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkRpmUfn-zHrKC8U--QFVA5gY3WRM_GWC7mVI39DRgJ9kX9rg7oBlnCjQGoCeqj8LthIcGkR_iwfrE3_NkitqROIZ6OyEMYBpMvWgWAqa1FvWBYcQdG6-QZx__bZmrEar830tDbEJDl89LkPz5D6CgoVwC5rduHUkCco4XcktAhA4zjwN9S1pYENYm4r8-XHQL-atb_CBabdMRrI6zE-IPaNPrzvi8HQrB904wkLNHCg8agNNSRiIXwBgLezQXro4ksjxJNOELP3Gg"/>
+                        <button onclick="toggleFavorite(event, this)" class="absolute top-3 right-3 flex items-center justify-center h-8 w-8 rounded-full bg-black/40 text-white hover:bg-black/60 transition-smooth">
+                            <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-lg font-bold text-primary dark:text-accent">R$ 1.200.000</p>
+                        <p class="text-base font-semibold text-slate-800 dark:text-white mt-1">Avenida Principal, 456</p>
+                        <p class="text-sm text-neutral-text dark:text-neutral-border">Recife, PE</p>
+                        <div class="flex items-center gap-4 text-neutral-text dark:text-neutral-border mt-3 text-sm">
+                            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">bed</span> 5</span>
+                            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">bathtub</span> 4</span>
+                            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-base">square_foot</span> 310m²</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <!-- New Listings Section -->
+        <section class="px-4 py-4 pb-24 animate-slideUp delay-400">
+            <div class="flex items-center justify-between mb-3">
+                <h2 class="text-slate-800 dark:text-white text-xl font-bold leading-tight tracking-tight">Novos Anúncios</h2>
+                <a href="listings.html" class="text-primary font-semibold text-sm">Ver todos</a>
+            </div>
+            <div class="flex flex-col gap-4">
+                
+                <!-- New Listing Card 1 -->
+                <div onclick="goToProperty('property-details.html')" class="flex items-center gap-4 bg-white dark:bg-neutral-text/20 p-3 rounded-xl shadow-md hover:shadow-lg transition-smooth cursor-pointer hover:scale-105">
+                    <img alt="Casa charmosa de um andar com cerca branca" class="w-24 h-24 object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBU6UHf7Jn7V6w-BVJhRf4a1sBG5E7lXatKVhw5x0tbBLRw1HdWvJtYWOSzYIycBwxf5A0eLJVJmfivgg6lhvXb8ncdqitgrUmHzOk3nVDH9_hlk5PTrl0iOPbZOlzAbGjXBVhw7wUjZFqED018E089mf2zQIW1lT72gNMwWAmnS4_S9BRv-B1z3SXKH8tAhW2pjN6JEjMB0cSfUEn1jmrfILdiaZGaA7qe5l4ARfjp67OM9vIkZ0BddVkmt8hMwfVevB6fac8LX21J"/>
+                    <div class="flex-1">
+                        <p class="text-base font-bold text-primary dark:text-accent">R$ 675.000</p>
+                        <p class="font-semibold text-slate-800 dark:text-white">Rua do Pinheiro, 789</p>
+                        <p class="text-sm text-neutral-text dark:text-neutral-border">Olinda, PE</p>
+                        <div class="flex items-center gap-3 text-neutral-text dark:text-neutral-border mt-2 text-xs">
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">bed</span> 3</span>
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">bathtub</span> 2</span>
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">square_foot</span> 180m²</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Listing Card 2 -->
+                <div onclick="goToProperty('property-details.html')" class="flex items-center gap-4 bg-white dark:bg-neutral-text/20 p-3 rounded-xl shadow-md hover:shadow-lg transition-smooth cursor-pointer hover:scale-105">
+                    <img alt="Mansão ultra-moderna com piscina à noite" class="w-24 h-24 object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdTa2fEwUZZJg0LPGAGX0mzxpPwmrpsesnAe5mzb34RRxpGiCwN-4Alj4CwQy3wGsYFogHnRb4QfssedpprpHffNmQF-RO80lMwMxGAvOSDFo-nQMcL9qaesOPb5yzukgxY5VsR2lPuz3nCSIwXvc5JCIe0GH4F6PhPjLj5ljjmxUlG050o0LAZPYCV91x2LM1-Lxof-9rIa6uu-f9CUP6_lqjJx0KdQTw9VA0OuwzxMtb9Aq7Tw0t4ySI4vgeFnqP713tJVrAGj6j"/>
+                    <div class="flex-1">
+                        <p class="text-base font-bold text-primary dark:text-accent">R$ 3.500.000</p>
+                        <p class="font-semibold text-slate-800 dark:text-white">Avenida das Colinas, 101</p>
+                        <p class="text-sm text-neutral-text dark:text-neutral-border">Boa Viagem, Recife - PE</p>
+                        <div class="flex items-center gap-3 text-neutral-text dark:text-neutral-border mt-2 text-xs">
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">bed</span> 6</span>
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">bathtub</span> 7</span>
+                            <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">square_foot</span> 650m²</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        </main>
+        <!-- Bottom Navigation Bar -->
+        <nav class="absolute inset-x-0 bottom-0 w-full bg-background-light dark:bg-background-dark border-t border-zinc-200 dark:border-zinc-800 px-4 pb-3 pt-2 z-20">
+          <div class="flex gap-2">
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary dark:text-primary" href="home.html">
+              <span class="material-symbols-outlined fill flex h-8 items-center justify-center">home</span>
+              <p class="text-xs font-bold leading-normal tracking-[0.015em]">Início</p>
+            </a>
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="listings.html">
+              <span class="material-symbols-outlined flex h-8 items-center justify-center">search</span>
+              <p class="text-xs font-medium leading-normal tracking-[0.015em]">Busca</p>
+            </a>
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="favorites-swipe.html">
+              <span class="material-symbols-outlined flex h-8 items-center justify-center">favorite</span>
+              <p class="text-xs font-medium leading-normal tracking-[0.015em]">Salvos</p>
+            </a>
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="messages.html">
+              <span class="material-symbols-outlined flex h-8 items-center justify-center">chat_bubble</span>
+              <p class="text-xs font-medium leading-normal tracking-[0.015em]">Chats</p>
+            </a>
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="#">
+              <span class="material-symbols-outlined flex h-8 items-center justify-center">person</span>
+              <p class="text-xs font-medium leading-normal tracking-[0.015em]">Perfil</p>
+            </a>
+          </div>
+        </nav>
+         
+        </div>
+     </div>
+     
+     <script>
+        // Auto theme detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+        }
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (e.matches) {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            }
+        });
+        
+        // Navigation functions
+        function goToProperty(url) {
+            document.body.classList.add('page-exit');
+            setTimeout(() => {
+                window.location.href = url;
+            }, 300);
+        }
+        
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                const searchTerm = event.target.value;
+                if (searchTerm.trim()) {
+                    goToProperty('listings.html');
+                }
+            }
+        }
+        
+        function selectCategory(element, category) {
+            // Remove active class from all categories
+            document.querySelectorAll('.flex.gap-3.px-4.py-3 > div').forEach(cat => {
+                cat.classList.remove('bg-primary/20', 'dark:bg-accent/20');
+                cat.classList.add('bg-neutral-border', 'dark:bg-neutral-text/30');
+                cat.querySelector('p').classList.remove('text-primary', 'dark:text-accent', 'font-semibold', 'text-white');
+                cat.querySelector('p').classList.add('text-neutral-text', 'dark:text-neutral-border', 'font-medium');
+            });
+            
+            // Add active class to selected category
+            element.classList.remove('bg-neutral-border', 'dark:bg-neutral-text/30');
+            element.classList.add('bg-primary/20', 'dark:bg-accent/20');
+            element.querySelector('p').classList.remove('text-neutral-text', 'dark:text-neutral-border', 'font-medium');
+            element.querySelector('p').classList.add('text-white', 'font-semibold');
+            
+            // Filter logic would go here
+            console.log('Selected category:', category);
+        }
+        
+        function toggleFavorite(event, button) {
+            event.stopPropagation();
+            const icon = button.querySelector('.material-symbols-outlined');
+            if (icon.textContent === 'favorite_border') {
+                icon.textContent = 'favorite';
+                icon.style.fontVariationSettings = "'FILL' 1";
+                button.classList.add('text-red-500');
+            } else {
+                icon.textContent = 'favorite_border';
+                icon.style.fontVariationSettings = "'FILL' 0";
+                button.classList.remove('text-red-500');
+            }
+        }
+        
+        function handleNotification() {
+            // Notification logic
+            console.log('Notifications clicked');
+        }
+        
+        // Smooth page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('page-transition');
+            setTimeout(() => {
+                document.body.classList.remove('page-exit');
+            }, 100);
+        });
+    </script>
+    
+</body>
+</html>

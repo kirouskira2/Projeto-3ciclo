@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#52B788",
+            "background-light": "#61c798",
+            "background-dark": "#181A20",
+            "card-light": "#FFFFFF",
+            "card-dark": "#262A34",
+            "text-light-primary": "#2D344B",
+            "text-dark-primary": "#FFFFFF",
+            "text-light-secondary": "#6A7081",
+            "text-dark-secondary": "#B0B3B8",
+          },
+          fontFamily: {
+            display: ["Poppins", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "1.25rem",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    .dashed-circle path {
+      stroke-dasharray: 20, 10;
+      stroke-dashoffset: 360;
+      animation: draw 20s linear infinite reverse;
+    }
+    body {
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+    }
+    /* Animações adicionais */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-float {
+      animation: float 3s ease-in-out infinite;
+    }
+    .animate-fade-in {
+      animation: fadeIn 2s ease-out;
+    }
+    /* Proporção mobile 390x844 */
+    .mobile-container {
+      width: 390px;
+      height: 844px;
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+    @media (max-width: 390px) {
+      .mobile-container {
+        width: 100vw;
+        height: 100vh;
+      }
+    }
+    /* Animação clean e suave para imagens */
+    @keyframes floatClean {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-8px) scale(1.02); }
+    }
+    .animate-float-clean {
+      animation: floatClean 4s ease-in-out infinite;
+    }
+    /* SPLASH background (adaptado do Figma) */
+    .splash-bg { position: absolute; inset: 0; pointer-events: none; }
+    .splash-bg .bg { position: absolute; top: -80px; left: -182px; display: flex; flex-direction: column; align-items: flex-start; opacity: 0.7; padding-right: 12px; padding-left: 74px; width: 682px; height: 1151px; }
+    .splash-bg .autoWrapper { position: relative; margin-left: 293px; width: 303px; height: 303px; }
+    .splash-bg .ellipse15 { position: absolute; right: -12px; bottom: -121px; opacity: 0.2; border: 4px dashed #ffffff; border-radius: 50%; width: 250px; height: 250px; }
+    .splash-bg .ellipse13 { position: absolute; top: 37px; left: 38px; border-radius: 50%; width: 228px; height: 228px; background-image: linear-gradient(34.7deg, #ffffff66 -13.72%, #ffd7e51a 46.09%); }
+    .splash-bg .ellipse14 { position: absolute; top: 0; left: 0; border-radius: 50%; width: 303px; height: 303px; background-image: linear-gradient(31.27deg, #4caf504d -43.12%, #008248d4 117.5%); }
+    .splash-bg .autoWrapper2 { position: relative; margin-top: 380px; width: 467px; height: 467px; }
+    .splash-bg .group287 { position: absolute; top: 0; left: 0; width: 467px; height: 467px; }
+    .splash-bg .ellipse17 { position: absolute; top: 80px; left: 81px; border-radius: 50%; width: 307px; height: 307px; rotate: 9deg; background-image: linear-gradient(31.27deg, #4caf504d -43.12%, #008248d4 117.5%); }
+    .splash-bg .ellipse18 { position: absolute; top: 30px; left: 30px; border-radius: 50%; width: 408px; height: 408px; rotate: 9deg; background-image: linear-gradient(31.27deg, #4caf504d -43.12%, #008248d4 117.5%); }
+    .splash-bg .ellipse16 { position: absolute; top: -50px; left: -74px; opacity: 0.3; border: 4px dashed #ffffff; border-radius: 50%; width: 339px; height: 339px; }
+    .splash-bg .status-bar { position: absolute; top: 0; left: 0; width: 390px; height: 44px; display: flex; align-items: flex-start; padding: 13px 22px 10px 21px; }
+    .splash-bg .timeStyle { display: flex; align-items: flex-start; padding-top: 3px; padding-bottom: 1px; }
+    .splash-bg .aTime3 { width: 54px; text-align: center; color: #ffffff; font-size: 14px; font-weight: 600; }
+    .splash-bg .aTime { letter-spacing: -0.28px; color: #ffffff; font-size: 14px; font-weight: 600; }
+    .splash-bg .aTime2 { letter-spacing: 0; color: #ffffff; font-size: 14px; font-weight: 600; }
+    .splash-bg .cellularConnection { margin-top: 5px; margin-left: 251px; width: 17px; height: 11px; }
+    .splash-bg .wifi { margin-top: 4px; margin-left: 5px; width: 15px; height: 11px; }
+    .splash-bg .battery { margin-top: 4px; margin-left: 5px; width: 24px; height: 11px; }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display flex items-center justify-center min-h-screen">
+  <div class="mobile-container bg-background-light dark:bg-background-dark shadow-2xl overflow-hidden relative">
+    <div class="relative h-full overflow-hidden">
+      <div class="absolute inset-0">
+        <div class="splash-bg" aria-hidden="true">
+          <div class="bg">
+            <div class="autoWrapper">
+              <div class="ellipse15"></div>
+              <div class="ellipse13"></div>
+              <div class="ellipse14"></div>
+            </div>
+            <div class="autoWrapper2">
+              <div class="group287">
+                <div class="ellipse17"></div>
+                <div class="ellipse18"></div>
+              </div>
+              <div class="ellipse16"></div>
+            </div>
+          </div>
+          <div class="status-bar">
+            <div class="timeStyle">
+              <p class="aTime3"><span class="aTime">9:4</span><span class="aTime2">1</span></p>
+            </div>
+            <img src=".figma/image/mhb2ebaj-6hvcxj9.svg" class="cellularConnection" alt="Cellular"/>
+            <img src=".figma/image/mhb2ebai-1rxqxre.svg" class="wifi" alt="WiFi"/>
+            <img src=".figma/image/mhb2ebai-7uuws4l.svg" class="battery" alt="Battery"/>
+          </div>
+        </div>
+        <!-- Logo no topo -->
+        <img alt="Logo do App" class="absolute top-16 left-1/2 h-32 w-auto -translate-x-1/2 transform-gpu object-contain mb-8" src=".figma/image/mhauf8cz-f9iries.png"/>
+        <!-- Removidos círculos antigos para usar SPLASH -->
+      </div>
+      
+      <!-- Container de imagens -->
+      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform-gpu">
+        <div class="relative h-[160px] w-[160px]">
+          <!-- Imagem pequena tradicional -->
+          
+          <!-- Imagem estilo Tudor -->
+          <img alt="Casa estilo Tudor com gramado verde" class="absolute top-2 left-0 h-16 w-16 -translate-x-1 rotate-[-10deg] transform-gpu rounded-xl border-2 border-white/60 object-cover shadow-md" src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=tudor+style+house+with+green+lawn+traditional+english+architecture&image_size=square"/>
+          
+          <!-- Imagem de casas modernas -->
+          <img alt="Fileira de casas modernas" class="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 transform-gpu rounded-2xl border-3 border-white object-cover shadow-lg" src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=modern+townhouses+row+contemporary+architecture+clean+lines&image_size=square"/>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Seção de Call-to-Action -->
+    <div class="absolute bottom-4 left-0 right-0 w-full rounded-t-3xl bg-card-light p-6 pt-8 text-center shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)] dark:bg-card-dark dark:shadow-none">
+      <h1 class="text-2xl font-bold leading-tight text-text-light-primary dark:text-text-dark-primary">
+        Encontre o lugar<br/>dos seus sonhos!
+      </h1>
+      
+      <div class="mt-6 space-y-4">
+        <a id="register-link" href="register.html" class="flex h-14 w-full items-center justify-center rounded-lg bg-primary px-6 text-base font-medium text-white shadow-lg transition-all duration-200 hover:bg-primary/90 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark transform hover:scale-[1.02]">
+          Registrar
+        </a>
+        
+        <p class="text-sm text-text-light-secondary dark:text-text-dark-secondary">
+          Já possui uma conta? <a id="login-link" class="font-semibold text-primary underline hover:text-primary/80 transition-colors" href="login.html">Logue aqui!</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Script para alternar modo escuro e otimizações mobile -->
+  <script>
+    // Verifica preferência do sistema
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    }
+    
+    // Ouve mudanças na preferência
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (e.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    });
+    
+    // Previne zoom em dispositivos iOS
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
+    
+    // Animação suave ao carregar
+    window.addEventListener('load', () => {
+      document.body.style.opacity = '1';
+    });
+
+    // Redireciona com animação de fade-out ao clicar em "Logue aqui!"
+    document.getElementById('login-link')?.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.body.style.transition = 'opacity 300ms ease';
+      document.body.style.opacity = '0';
+      setTimeout(() => { window.location.href = 'login.html'; }, 300);
+    });
+    
+    // Ajuste de transição suave ao clicar em Registrar
+    const registerLink = document.getElementById('register-link');
+    if (registerLink) {
+      registerLink.addEventListener('click', function (e) {
+        // Se já era um link direto, mantemos. Natural.
+        // Opcional: se querer fade-out como login-link
+        e.preventDefault();
+        document.body.style.transition = 'opacity 200ms ease-out';
+        document.body.style.opacity = '0';
+        setTimeout(() => { window.location.href = 'register.html'; }, 200);
+      });
+    }
+  </script>
+</body>
+</html>

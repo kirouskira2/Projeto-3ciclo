@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+
+    <title>Detalhes do Imóvel</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#39E079",
+                        secondary: "#F2F2F7",
+                        accent: "#FF9500",
+                        "text-primary": "#1C1C1E",
+                        "text-secondary": "#636366",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#122017"
+                    },
+                    fontFamily: {
+                        display: "Inter"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        body {
+            min-height: max(884px, 100dvh);
+            background: linear-gradient(135deg, #f6f8f7 0%, #e8f5e8 100%);
+        }
+        
+        .dark body {
+            background: linear-gradient(135deg, #122017 0%, #1a2e1f 100%);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-slideInRight {
+            animation: slideInRight 0.4s ease-out forwards;
+        }
+        
+        .transition-smooth {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .page-transition {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        
+        .page-exit {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .image-carousel {
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+        
+        .image-carousel img {
+            scroll-snap-align: start;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200 flex items-center justify-center min-h-screen">
+    <div class="mobile-container relative w-[390px] min-h-[844px] mx-auto flex flex-col overflow-hidden rounded-2xl shadow-lg group/design-root">
+        
+        <!-- Sticky Header / Top App Bar -->
+        <header class="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-4 justify-between border-b border-secondary dark:border-gray-800">
+            <a href="home.html" class="flex items-center justify-center rounded-full h-10 w-10 text-text-primary dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-smooth">
+                <span class="material-symbols-outlined text-2xl">arrow_back</span>
+            </a>
+            <div class="flex items-center gap-2">
+                <button onclick="shareProperty()" class="flex items-center justify-center rounded-full h-10 w-10 text-text-primary dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-smooth">
+                    <span class="material-symbols-outlined text-2xl">ios_share</span>
+                </button>
+                <button onclick="toggleFavorite(this)" class="flex items-center justify-center rounded-full h-10 w-10 text-text-primary dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-smooth">
+                    <span class="material-symbols-outlined text-2xl">favorite_border</span>
+                </button>
+            </div>
+        </header>
+        
+        <main class="flex-grow pb-28">
+            
+            <!-- Header Image / Image Carousel -->
+            <div class="@container animate-fadeInUp">
+                <div class="relative bg-cover bg-center flex flex-col justify-end overflow-hidden min-h-80" data-alt="Cozinha moderna com bancadas de mármore e eletrodomésticos de aço inox" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 35%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuAnpgAcS7JllKrnGcfnMzyvbkKVYu4f5kD7VdOHMuONeq-btSsiN1dQv-CtTZfjo2uPNpJAgMryAb5EOMGhCyC-cL5bhP4BxiK58OnKyVwkqtZE89UH3nc_7AlwICMCOUHxlQQyb0PyDFuC4tenI4yxRxm20BgpvGS-t4cTfqQCIeZ-uBOQbJiUjwZ3pgM3rAMCeS06P_I2xijKrE6fCzu_AS8NaF3truHlXxAPckRO-BPuLLrUKyvpx2jzPtzNu7jJID7fMlnCJ0ql");'>
+                    <div class="absolute top-4 right-4 bg-black/50 text-white text-xs font-medium px-3 py-1.5 rounded-full">
+                        1 / 15
+                    </div>
+                    <div class="flex justify-center gap-2 p-4">
+                        <div class="w-8 h-1.5 rounded-full bg-white"></div>
+                        <div class="w-8 h-1.5 rounded-full bg-white/50"></div>
+                        <div class="w-8 h-1.5 rounded-full bg-white/50"></div>
+                        <div class="w-8 h-1.5 rounded-full bg-white/50"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Primary Info Card -->
+            <div class="px-4 pt-6 pb-2 animate-fadeInUp" style="animation-delay: 0.1s;">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="inline-block bg-accent/20 text-accent text-xs font-bold px-3 py-1 rounded-full">Novo Anúncio</span>
+                    <span class="text-text-secondary dark:text-gray-400 text-sm">À Venda</span>
+                </div>
+                <h1 class="text-text-primary dark:text-white tracking-tight text-4xl font-bold leading-tight">R$ 749.000</h1>
+                <p class="text-text-secondary dark:text-gray-300 text-base font-normal leading-normal pt-2">Rua das Acácias, 123 - Recife, PE</p>
+            </div>
+            
+            <!-- Stats Section -->
+            <div class="flex justify-start gap-4 px-4 pt-4 pb-2 overflow-x-auto animate-fadeInUp" style="animation-delay: 0.2s;">
+                <div class="flex items-center gap-2 text-text-primary dark:text-white">
+                    <span class="material-symbols-outlined text-primary text-xl">king_bed</span>
+                    <p class="text-base font-medium whitespace-nowrap">3 Quartos</p>
+                </div>
+                <div class="flex items-center gap-2 text-text-primary dark:text-white">
+                    <span class="material-symbols-outlined text-primary text-xl">bathtub</span>
+                    <p class="text-base font-medium whitespace-nowrap">2 Banheiros</p>
+                </div>
+                <div class="flex items-center gap-2 text-text-primary dark:text-white">
+                    <span class="material-symbols-outlined text-primary text-xl">square_foot</span>
+                    <p class="text-base font-medium whitespace-nowrap">180m²</p>
+                </div>
+            </div>
+            
+            <div class="px-4 py-6 animate-fadeInUp" style="animation-delay: 0.3s;">
+                <hr class="border-secondary dark:border-gray-800"/>
+            </div>
+            
+            <!-- Tab Bar / Segmented Control -->
+            <div class="px-4 animate-fadeInUp" style="animation-delay: 0.4s;">
+                <div class="flex gap-2 p-1 bg-secondary dark:bg-gray-800 rounded-lg">
+                    <button onclick="switchTab('details')" id="details-tab" class="flex-1 text-center py-2 px-4 rounded-md text-sm font-semibold bg-primary text-white transition-smooth">Detalhes</button>
+                    <button onclick="switchTab('features')" id="features-tab" class="flex-1 text-center py-2 px-4 rounded-md text-sm font-semibold text-text-secondary dark:text-gray-300 transition-smooth">Características</button>
+                    <button onclick="switchTab('location')" id="location-tab" class="flex-1 text-center py-2 px-4 rounded-md text-sm font-semibold text-text-secondary dark:text-gray-300 transition-smooth">Localização</button>
+                </div>
+            </div>
+            
+            <!-- Details Tab Content -->
+            <div id="details-content" class="tab-content px-4 pt-6 animate-fadeInUp" style="animation-delay: 0.5s;">
+                <h2 class="text-xl font-bold text-text-primary dark:text-white mb-2">Descrição</h2>
+                <div class="relative">
+                    <p class="text-text-secondary dark:text-gray-300 text-base leading-relaxed max-h-24 overflow-hidden">
+                        Bem-vindo a esta casa charmosa e bem conservada no coração de Recife. Esta casa de 3 quartos e 2 banheiros oferece uma espaçosa área de estar de conceito aberto com abundante luz natural, perfeita para receber convidados ou relaxar com a família. A cozinha moderna possui bancadas de granito, eletrodomésticos de aço inox e amplo espaço de armazenamento...
+                    </p>
+                    <div class="absolute bottom-0 left-0 w-full h-10 bg-gradient-to-t from-background-light dark:from-background-dark to-transparent"></div>
+                </div>
+                <button onclick="readMore()" class="text-primary font-semibold text-base mt-1 hover:text-primary/80 transition-smooth">Ler Mais</button>
+            </div>
+            
+            <!-- Features Tab Content -->
+            <div id="features-content" class="tab-content px-4 pt-8 hidden animate-fadeInUp" style="animation-delay: 0.5s;">
+                <h2 class="text-xl font-bold text-text-primary dark:text-white mb-4">Características Principais</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">local_parking</span>
+                        <p class="text-text-primary dark:text-white font-medium">Garagem 2 Carros</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">deck</span>
+                        <p class="text-text-primary dark:text-white font-medium">Deck Privativo</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">local_fire_department</span>
+                        <p class="text-text-primary dark:text-white font-medium">Lareira</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">ac_unit</span>
+                        <p class="text-text-primary dark:text-white font-medium">Ar Condicionado</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">yard</span>
+                        <p class="text-text-primary dark:text-white font-medium">Quintal Cercado</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">dishwasher</span>
+                        <p class="text-text-primary dark:text-white font-medium">Lava-louças</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Location Tab Content -->
+            <div id="location-content" class="tab-content px-4 pt-8 hidden animate-fadeInUp" style="animation-delay: 0.5s;">
+                <h2 class="text-xl font-bold text-text-primary dark:text-white mb-4">Localização</h2>
+                <div class="h-56 w-full bg-secondary dark:bg-gray-800 rounded-xl overflow-hidden">
+                    <img alt="Mapa mostrando a localização do imóvel em uma área residencial." class="w-full h-full object-cover" data-location="Recife" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7mRafrxmkpHIFyU-K5ECc9n-FWoEs5S_1uP9R1BhjDIshbI3_xg4bcXaskYQZsAp_bYM12_U4JPcKjIhHyTCU8Lc_gYY3sxQhu9GGN4htUy8KBB8X76gMK5q-Op1LJx5OmfSvbplVS4q7hP_IUBs2NouGmOQCXKKq-sQVD-j5W0hniVVJ_lsbAOk0m4TIcaYcLHW0hpsfPTHDz8kl55uUUI8XyNvubIxcCR8h6K6lPSaz1BITJT4vWrUJvCn1NP3hXQrrWA7vZMiO"/>
+                </div>
+            </div>
+            
+            <!-- Agent/Owner Contact Card -->
+            <div class="px-4 pt-8 animate-fadeInUp" style="animation-delay: 0.6s;">
+                <div class="flex items-center gap-4 rounded-xl p-4 border border-secondary dark:border-gray-800 bg-background-light dark:bg-gray-900">
+                    <img class="h-16 w-16 rounded-full object-cover" data-alt="Retrato de um corretor de imóveis sorrindo, João Silva." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeKdThTZgolJ1fEUEgqZfPMtVIL5R6OU_0lOiiG-oU6KbLzaL7b3V4y8AhuuY98JQ-7ru7XpxcT8ctCryjxrK-cIi8NsRuKYFPQfAABzlA1OQ9u5CRIUbZl-_jmmH5Q2XrAzdyOrDDky2CVxVtuaWRcH337wPZliHNLTUH_Q6yTWo1sUwe3aBKyTJ7aiYsssNVEveAYdZd3gdy-eGavdYL_zfIyIVYV2ZtLh_3aMGJphWS_-nrTo44kJrSldEgxdV9LnE94fYED3Df"/>
+                    <div>
+                        <p class="font-bold text-text-primary dark:text-white">João Silva</p>
+                        <p class="text-sm text-text-secondary dark:text-gray-400">Corretor de Imóveis</p>
+                        <a class="text-primary font-semibold text-sm hover:text-primary/80 transition-smooth" href="tel:11-98765-4321">Ver telefone</a>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+        
+        <!-- CTA Footer dentro do container -->
+        <footer class="shrink-0 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-sm p-4 border-t border-secondary dark:border-gray-800">
+            <div class="flex items-center gap-4">
+                <button onclick="emailAgent()" class="flex-1 flex items-center justify-center gap-2 rounded-lg h-12 text-primary border border-primary font-bold text-base leading-normal hover:bg-primary/10 transition-smooth">
+                    <span class="material-symbols-outlined">chat_bubble</span>
+                    Chat com Corretor
+                </button>
+                <button onclick="callAgent()" class="flex-1 flex items-center justify-center gap-2 rounded-lg h-12 bg-primary text-white font-bold text-base leading-normal hover:bg-primary/90 transition-smooth">
+                    <span class="material-symbols-outlined">call</span>
+                    Ligar Agora
+                </button>
+            </div>
+        </footer>
+
+        <!-- Bottom Navigation Bar -->
+        <nav class="flex shrink-0 gap-2 border-t border-zinc-200 dark:border-zinc-800 bg-background-light dark:bg-background-dark px-4 pb-3 pt-2">
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="home.html">
+                <span class="material-symbols-outlined flex h-8 items-center justify-center">home</span>
+                <p class="text-xs font-medium leading-normal tracking-[0.015em]">Início</p>
+            </a>
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary dark:text-primary" href="listings.html">
+                <span class="material-symbols-outlined flex h-8 items-center justify-center">search</span>
+                <p class="text-xs font-bold leading-normal tracking-[0.015em]">Busca</p>
+            </a>
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="favorites-swipe.html">
+                <span class="material-symbols-outlined flex h-8 items-center justify-center">favorite</span>
+                <p class="text-xs font-medium leading-normal tracking-[0.015em]">Salvos</p>
+            </a>
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="messages.html">
+                <span class="material-symbols-outlined flex h-8 items-center justify-center">chat_bubble</span>
+                <p class="text-xs font-medium leading-normal tracking-[0.015em]">Chats</p>
+            </a>
+            <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="#">
+                <span class="material-symbols-outlined flex h-8 items-center justify-center">person</span>
+                <p class="text-xs font-medium leading-normal tracking-[0.015em]">Perfil</p>
+            </a>
+        </nav>
+        
+    </div>
+    
+    <script>
+        // Auto theme detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+        }
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (e.matches) {
+                document.documentElement.classList.remove('light');
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            }
+        });
+        
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('[id$="-tab"]').forEach(tab => {
+                tab.classList.remove('bg-primary', 'text-white');
+                tab.classList.add('text-text-secondary', 'dark:text-gray-300');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-content').classList.remove('hidden');
+            
+            // Activate selected tab
+            const activeTab = document.getElementById(tabName + '-tab');
+            activeTab.classList.add('bg-primary', 'text-white');
+            activeTab.classList.remove('text-text-secondary', 'dark:text-gray-300');
+        }
+        
+        // Property actions
+        function toggleFavorite(button) {
+            const icon = button.querySelector('.material-symbols-outlined');
+            if (icon.textContent === 'favorite_border') {
+                icon.textContent = 'favorite';
+                icon.style.fontVariationSettings = "'FILL' 1";
+                button.classList.add('text-red-500');
+            } else {
+                icon.textContent = 'favorite_border';
+                icon.style.fontVariationSettings = "'FILL' 0";
+                button.classList.remove('text-red-500');
+            }
+        }
+        
+        function shareProperty() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Casa Moderna - Recife',
+                    text: 'Confira este incrível imóvel!',
+                    url: window.location.href,
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                navigator.clipboard.writeText(window.location.href);
+                alert('Link copiado para a área de transferência!');
+            }
+        }
+        
+        function readMore() {
+            const description = document.querySelector('#details-content p');
+            description.classList.remove('max-h-24');
+            document.querySelector('#details-content button').style.display = 'none';
+        }
+        
+        function emailAgent() {
+            window.location.href = 'chat-detail.html';
+        }
+        
+        function callAgent() {
+            window.location.href = 'tel:11-98765-4321';
+        }
+        
+        // Smooth page transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('page-transition');
+            setTimeout(() => {
+                document.body.classList.remove('page-exit');
+            }, 100);
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Imóveis Disponíveis - Imobiliária</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+            font-family: 'Inter', sans-serif;
+        }
+        .property-card {
+            transition: all 0.3s ease;
+        }
+        .property-card:hover {
+            transform: translateY(-2px);
+        }
+        .filter-chip {
+            transition: all 0.2s ease;
+        }
+        .filter-chip.active {
+            background-color: #39E079;
+            color: white;
+        }
+        .sort-dropdown {
+            transition: all 0.2s ease;
+        }
+        @media (prefers-color-scheme: dark) {
+            .sort-dropdown {
+                background-color: #1f2937;
+                color: #f9fafb;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#39E079',
+                        secondary: '#F2F2F7',
+                        accent: '#FF9500',
+                        'text-primary': '#1C1C1E',
+                        'text-secondary': '#636366',
+                        'background-light': '#f6f8f7',
+                        'background-dark': '#122017'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    },
+                    borderRadius: {
+                        'xl': '0.75rem',
+                        '2xl': '1rem'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-primary dark:text-white">
+    <div class="mobile-container relative w-[390px] min-h-[844px] mx-auto flex flex-col overflow-hidden rounded-2xl shadow-lg bg-background-light dark:bg-background-dark">
+        
+        <!-- Sticky Header -->
+        <header class="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-4 justify-between border-b border-secondary dark:border-gray-700">
+            <button onclick="window.location.href='home.html'" class="flex items-center justify-center rounded-full h-10 w-10 text-text-primary dark:text-white hover:bg-secondary dark:hover:bg-gray-700 transition-colors">
+                <span class="material-symbols-outlined text-xl">arrow_back</span>
+            </button>
+            <h1 class="text-lg font-semibold">Imóveis</h1>
+            <button onclick="window.location.href='filter.html'" class="flex items-center justify-center rounded-full h-10 w-10 text-text-primary dark:text-white hover:bg-secondary dark:hover:bg-gray-700 transition-colors">
+                <span class="material-symbols-outlined text-xl">tune</span>
+            </button>
+        </header>
+
+        <main class="flex-grow px-4 py-4 pb-24">
+            <!-- Search Bar -->
+            <div class="relative mb-4">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary">search</span>
+                <input type="text" placeholder="Buscar por localização, bairro..." class="w-full pl-10 pr-4 py-3 bg-secondary dark:bg-gray-700 rounded-xl border-0 focus:ring-2 focus:ring-primary focus:outline-none text-sm">
+            </div>
+
+            <!-- Filter Chips -->
+            <div class="flex gap-2 mb-6 overflow-x-auto pb-2" style="scrollbar-width: none;">
+                <button class="filter-chip active px-4 py-2 bg-secondary dark:bg-gray-700 rounded-full text-sm font-medium whitespace-nowrap" onclick="toggleFilter(this, 'todos')">Todos</button>
+                <button class="filter-chip px-4 py-2 bg-secondary dark:bg-gray-700 rounded-full text-sm font-medium whitespace-nowrap" onclick="toggleFilter(this, 'casa')">Casas</button>
+                <button class="filter-chip px-4 py-2 bg-secondary dark:bg-gray-700 rounded-full text-sm font-medium whitespace-nowrap" onclick="toggleFilter(this, 'apartamento')">Apartamentos</button>
+                <button class="filter-chip px-4 py-2 bg-secondary dark:bg-gray-700 rounded-full text-sm font-medium whitespace-nowrap" onclick="toggleFilter(this, 'condominio')">Condomínios</button>
+                <button class="filter-chip px-4 py-2 bg-secondary dark:bg-gray-700 rounded-full text-sm font-medium whitespace-nowrap" onclick="toggleFilter(this, 'comercial')">Comercial</button>
+            </div>
+
+            <!-- Results Header -->
+            <div class="flex items-center justify-between mb-4">
+                <p class="text-text-secondary dark:text-gray-400 text-sm">
+                    <span id="results-count">24</span> imóveis encontrados
+                </p>
+                <div class="relative">
+                    <select id="sort-select" class="sort-dropdown appearance-none bg-transparent border border-secondary dark:border-gray-600 rounded-lg px-3 py-2 text-sm pr-8 focus:ring-2 focus:ring-primary focus:outline-none">
+                        <option value="relevancia">Relevância</option>
+                        <option value="menor-preco">Menor preço</option>
+                        <option value="maior-preco">Maior preço</option>
+                        <option value="maior-area">Maior área</option>
+                        <option value="mais-recente">Mais recente</option>
+                    </select>
+                    <span class="material-symbols-outlined absolute right-2 top-1/2 transform -translate-y-1/2 text-text-secondary pointer-events-none text-sm">expand_more</span>
+                </div>
+            </div>
+
+            <!-- Property Listings -->
+            <div id="property-listings" class="space-y-4">
+                <!-- Property Card 1 -->
+                <div class="property-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-secondary dark:border-gray-700" onclick="window.location.href='property-details.html'">
+                    <div class="relative">
+                        <img src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Casa%20moderna%20com%20fachada%20contempor%C3%A2nea%2C%20jardim%20bem%20cuidado%2C%20garagem%20para%202%20carros%2C%20ilumina%C3%A7%C3%A3o%20natural%2C%20estilo%20arquitet%C3%B4nico%20limpo&image_size=landscape_16_9" alt="Casa Moderna" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 left-3 bg-accent/90 text-white text-xs font-bold px-2 py-1 rounded-full">Destaque</div>
+                        <button class="absolute top-3 right-3 bg-white/80 dark:bg-black/80 rounded-full p-2 hover:bg-white dark:hover:bg-black transition-colors" onclick="event.stopPropagation(); toggleFavorite(this)">
+                            <span class="material-symbols-outlined text-red-500">favorite_border</span>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-bold text-primary">R$ 750.000</h3>
+                            <span class="text-xs text-text-secondary dark:text-gray-400">3 dias atrás</span>
+                        </div>
+                        <p class="text-text-secondary dark:text-gray-300 text-sm mb-3">Casa • 3 quartos • 2 suítes • 180m²</p>
+                        <p class="text-text-primary dark:text-white font-medium mb-3">Casa Moderna em Condomínio Fechado</p>
+                        <p class="text-text-secondary dark:text-gray-400 text-sm flex items-center">
+                            <span class="material-symbols-outlined text-sm mr-1">location_on</span>
+                            Casa Forte, Recife - PE
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Property Card 2 -->
+                <div class="property-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-secondary dark:border-gray-700" onclick="window.location.href='property-details.html'">
+                    <div class="relative">
+                        <img src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Apartamento%20moderno%20com%20varanda%2C%20vista%20panor%C3%A2mica%2C%20sala%20ampla%2C%20decor%C3%A7%C3%A3o%20contempor%C3%A2nea%2C%20ambiente%20aconchegante&image_size=landscape_16_9" alt="Apartamento" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 bg-white/80 dark:bg-black/80 rounded-full p-2 hover:bg-white dark:hover:bg-black transition-colors" onclick="event.stopPropagation(); toggleFavorite(this)">
+                            <span class="material-symbols-outlined text-red-500">favorite_border</span>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-bold text-primary">R$ 420.000</h3>
+                            <span class="text-xs text-text-secondary dark:text-gray-400">1 semana atrás</span>
+                        </div>
+                        <p class="text-text-secondary dark:text-gray-300 text-sm mb-3">Apartamento • 2 quartos • 1 suíte • 85m²</p>
+                        <p class="text-text-primary dark:text-white font-medium mb-3">Apartamento com Vista Panorâmica</p>
+                        <p class="text-text-secondary dark:text-gray-400 text-sm flex items-center">
+                            <span class="material-symbols-outlined text-sm mr-1">location_on</span>
+                            Boa Viagem, Recife - PE
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Property Card 3 -->
+                <div class="property-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm border border-secondary dark:border-gray-700" onclick="window.location.href='property-details.html'">
+                    <div class="relative">
+                        <img src="https://trae-api-us.mchost.guru/api/ide/v1/text_to_image?prompt=Sobrado%20em%20condom%C3%ADnio%20com%20%C3%A1rea%20de%20lazer%2C%20piscina%2C%20quadra%20esportiva%2C%20seguran%C3%A7a%2024h%2C%20ambiente%20familiar&image_size=landscape_16_9" alt="Sobrado" class="w-full h-48 object-cover">
+                        <button class="absolute top-3 right-3 bg-white/80 dark:bg-black/80 rounded-full p-2 hover:bg-white dark:hover:bg-black transition-colors" onclick="event.stopPropagation(); toggleFavorite(this)">
+                            <span class="material-symbols-outlined text-red-500">favorite_border</span>
+                        </button>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-xl font-bold text-primary">R$ 580.000</h3>
+                            <span class="text-xs text-text-secondary dark:text-gray-400">2 semanas atrás</span>
+                        </div>
+                        <p class="text-text-secondary dark:text-gray-300 text-sm mb-3">Sobrado • 3 quartos • 2 suítes • 150m²</p>
+                        <p class="text-text-primary dark:text-white font-medium mb-3">Sobrado em Condomínio com Lazer Completo</p>
+                        <p class="text-text-secondary dark:text-gray-400 text-sm flex items-center">
+                            <span class="material-symbols-outlined text-sm mr-1">location_on</span>
+                            Carmo, Olinda - PE
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading More Indicator -->
+            <div id="loading-indicator" class="hidden text-center py-4">
+                <div class="inline-flex items-center gap-2 text-text-secondary dark:text-gray-400">
+                    <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+                    <span class="text-sm">Carregando mais imóveis...</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation Bar -->
+        <nav class="flex shrink-0 gap-2 border-t border-zinc-200 dark:border-zinc-800 bg-background-light dark:bg-background-dark px-4 pb-3 pt-2">
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="home.html">
+            <span class="material-symbols-outlined flex h-8 items-center justify-center">home</span>
+            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Início</p>
+          </a>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary dark:text-primary" href="listings.html">
+            <span class="material-symbols-outlined fill flex h-8 items-center justify-center">search</span>
+            <p class="text-xs font-bold leading-normal tracking-[0.015em]">Busca</p>
+          </a>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="favorites-swipe.html">
+            <span class="material-symbols-outlined flex h-8 items-center justify-center">favorite</span>
+            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Salvos</p>
+          </a>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="messages.html">
+            <span class="material-symbols-outlined flex h-8 items-center justify-center">chat_bubble</span>
+            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Chats</p>
+          </a>
+          <a class="flex flex-1 flex-col items-center justify-end gap-1 text-zinc-500 dark:text-zinc-400" href="#">
+            <span class="material-symbols-outlined flex h-8 items-center justify-center">person</span>
+            <p class="text-xs font-medium leading-normal tracking-[0.015em]">Perfil</p>
+          </a>
+        </nav>
+    </div>
+
+    <script>
+        // Theme detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (e.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Filter functionality
+        function toggleFilter(button, filterType) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            // Add active class to clicked button
+            button.classList.add('active');
+            
+            // Filter properties (simplified for demo)
+            filterProperties(filterType);
+        }
+
+        function filterProperties(filterType) {
+            // This is a simplified filter - in a real app, you'd make an API call
+            const listings = document.getElementById('property-listings');
+            const count = document.getElementById('results-count');
+            
+            // Simulate filtering
+            if (filterType === 'todos') {
+                count.textContent = '24';
+            } else if (filterType === 'casa') {
+                count.textContent = '12';
+            } else if (filterType === 'apartamento') {
+                count.textContent = '8';
+            } else if (filterType === 'condominio') {
+                count.textContent = '3';
+            } else if (filterType === 'comercial') {
+                count.textContent = '1';
+            }
+            
+            // Add animation effect
+            listings.style.opacity = '0.5';
+            setTimeout(() => {
+                listings.style.opacity = '1';
+            }, 300);
+        }
+
+        // Sort functionality
+        document.getElementById('sort-select').addEventListener('change', function() {
+            const sortValue = this.value;
+            sortProperties(sortValue);
+        });
+
+        function sortProperties(sortType) {
+            // Simulate sorting - in a real app, you'd sort the data and re-render
+            const listings = document.getElementById('property-listings');
+            listings.style.opacity = '0.5';
+            setTimeout(() => {
+                listings.style.opacity = '1';
+            }, 300);
+        }
+
+        // Favorite functionality
+        function toggleFavorite(button) {
+            const icon = button.querySelector('.material-symbols-outlined');
+            if (icon.textContent === 'favorite_border') {
+                icon.textContent = 'favorite';
+                button.classList.add('text-red-500');
+            } else {
+                icon.textContent = 'favorite_border';
+                button.classList.remove('text-red-500');
+            }
+        }
+
+        // Infinite scroll simulation
+        let isLoading = false;
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100 && !isLoading) {
+                loadMoreProperties();
+            }
+        });
+
+        function loadMoreProperties() {
+            if (isLoading) return;
+            
+            isLoading = true;
+            const loadingIndicator = document.getElementById('loading-indicator');
+            loadingIndicator.classList.remove('hidden');
+            
+            // Simulate API call
+            setTimeout(() => {
+                // In a real app, you'd append new property cards here
+                loadingIndicator.classList.add('hidden');
+                isLoading = false;
+            }, 1500);
+        }
+
+        // Search functionality
+        document.querySelector('input[type="text"]').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            // Implement search logic here
+            if (searchTerm.length > 2) {
+                // Simulate search
+                filterProperties('search');
+            }
+        });
+    </script>
+</body>
+</html>

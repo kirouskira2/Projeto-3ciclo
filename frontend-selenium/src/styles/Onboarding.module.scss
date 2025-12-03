@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+}
+
+.onboarding {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16/9;
+  
+  .content {
+    position: relative;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 5%;
+    
+    .titles {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      animation: fadeInDown 1s ease-out 0.4s both;
+      
+      .title1 {
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 700;
+        color: #1e3932;
+        margin: 0;
+        margin-bottom: 0.5rem;
+        font-family: "DM Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      }
+      
+      .title2 {
+        font-size: clamp(24px, 3vw, 40px);
+        font-weight: 600;
+        color: #4caf50;
+        margin: 0;
+        font-family: "DM Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      }
+    }
+  }
+}
+
+/* Animações */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Responsividade para 16:9 */
+@media (max-width: 1920px) {
+  .onboarding {
+    min-height: 1080px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .onboarding {
+    min-height: 768px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .onboarding {
+    min-height: 576px;
+  }
+  
+  .content .titles {
+    top: 10%;
+  }
+}
+
+@media (max-width: 768px) {
+  .onboarding {
+    min-height: 432px;
+    aspect-ratio: 9/16;
+  }
+  
+  .content .titles {
+    top: 8%;
+  }
+}
+
+@media (max-width: 480px) {
+  .onboarding {
+    min-height: 320px;
+  }
+  
+  .content .titles {
+    top: 5%;
+  }
+}

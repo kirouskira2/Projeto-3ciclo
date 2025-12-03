@@ -1,0 +1,64 @@
+* {
+  box-sizing: border-box;
+}
+
+.iPhoneXStatusBarsSta {
+  display: flex;
+  align-items: flex-start;
+  padding: 13px 22px 10px 21px;
+  width: 414px;
+  height: 44px;
+
+  .timeStyle {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 3px;
+    padding-bottom: 1px;
+
+    .aTime3 {
+      width: 54px;
+      text-align: center;
+      color: #ffffff;
+      font-family: SFProText, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+
+      .aTime {
+        letter-spacing: -0.28px;
+        color: #ffffff;
+        font-family: SFProText, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .aTime2 {
+        letter-spacing: 0;
+        color: #ffffff;
+        font-family: SFProText, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimHei, Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .cellularConnection {
+    margin-top: 5px;
+    margin-left: 251px;
+    width: 17px;
+    height: 11px;
+  }
+
+  .wifi {
+    margin-top: 4px;
+    margin-left: 5px;
+    width: 15px;
+    height: 11px;
+  }
+
+  .battery {
+    margin-top: 4px;
+    margin-left: 5px;
+    width: 24px;
+    height: 11px;
+  }
+}

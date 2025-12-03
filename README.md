@@ -8,63 +8,60 @@ A solução foi estruturada em três módulos principais para garantir desacopla
 
 ### 1. Núcleo (`casaverde-java`)
 Módulo contendo o domínio da aplicação e lógica de negócios.
-- Desenvolvido em Java puro (sem frameworks).
-- Contém as entidades (`Cliente`, `Imovel`, `Visita`) e validações das regras de negócio.
-- Isolado de dependências de infraestrutura ou banco de dados.
-- Inclui testes unitários para validação de lógica.
+- Desenvolvido em Java puro (sem frameworks)
+- Entidades: Cliente, Imóvel, Visita
+- Validações das regras de negócio
+- Isolado de dependências de infraestrutura ou banco de dados
+- Inclui testes unitários para validação de lógica
 
 ### 2. API (`casaverde-api`)
 Camada de aplicação responsável por expor os serviços via REST.
-- Framework: Spring Boot.
-- Endpoints disponíveis em `/api/clientes` e `/api/imoveis`.
-- Persistência de dados em memória para fins de demonstração acadêmica.
-- Porta padrão: `8080`.
+- Framework: Spring Boot
+- Endpoints: `/api/clientes`, `/api/imoveis`, `/api/visitas`
+- Persistência de dados em memória (demonstração acadêmica)
+- Porta padrão: `8080`
 
 ### 3. Frontend e Testes (`frontend-selenium`)
 Interface de usuário e suíte de testes automatizados.
-- Interface desenvolvida em React com Vite.
-- Scripts de automação (E2E) em Python utilizando Selenium WebDriver para validação de cadastros.
-- Porta padrão: `5174`.
+- Interface em React com Vite
+- Automação E2E em Python com Selenium WebDriver
+- Porta padrão: `5174`
 
 ---
 
 ## Instruções de Execução
 
-**Requisitos:** Java 17, Maven, Node.js e Python instalados.
+Requisitos: Java 17, Maven, Node.js e Python instalados.
 
 ### 1. Backend (Java & Spring Boot)
-
-No diretório raiz do projeto, execute os comandos para instalar as dependências do núcleo e inicializar a API:
-
+No diretório raiz do projeto:
 ```bash
-# Instalação do módulo core
 mvn -f casaverde-java/pom.xml install
-
-# Inicialização da API
 mvn -f casaverde-api/pom.xml spring-boot:run
-2. Frontend (React)
-Em um novo terminal, acesse o diretório do frontend:
+```
 
-Bash
-
+### 2. Frontend (React)
+```bash
 cd frontend-selenium
 npm install
 npm run dev -- --port 5174
-3. Execução de Testes
-Testes Automatizados (E2E com Selenium) Para execução dos scripts de validação de interface:
+```
 
-Bash
-
+### 3. Execução de Testes
+Testes Automatizados (E2E com Selenium):
+```bash
 cd frontend-selenium
 python executar_testes.py
-Testes Unitários (Core) Para executar os testes de lógica de negócio no módulo Java puro:
+```
 
-Bash
-
+Testes Unitários (Core):
+```bash
 mvn -f casaverde-java/pom.xml test
-Stack Tecnológica
-Linguagens: Java 17, Python, JavaScript/TypeScript.
+```
 
-Frameworks: Spring Boot, React.
+---
 
-Ferramentas: Maven, Vite, Selenium WebDriver.
+## Stack Tecnológica
+- Linguagens: Java 17, Python, JavaScript/TypeScript
+- Frameworks: Spring Boot, React
+- Ferramentas: Maven, Vite, Selenium WebDriver
